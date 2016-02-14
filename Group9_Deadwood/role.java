@@ -16,15 +16,15 @@ public class role{
 		this.taken=0;
 	}
 
-	public String name(){
+	public String getName(){
 		return this.name;
 	}
 
-	public String quip(){
+	public String getQuip(){
 		return this.quip;
 	}
 
-	public int rank(){
+	public int getRank(){
 		return this.rank;
 	}
 
