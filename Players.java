@@ -9,27 +9,54 @@ public class Players {
    private int rehearsalVal;
    private String name;
    
-   private Players(int credits, int rank, double money, int rehearsalVal, String name) {
+   Players(int credits, int rank, double money, int rehearsalVal, String name) {
       this.credits = credits;
       this.money = money;
       this.rehearsalVal = rehearsalVal;
       this.name = name;
    }
    
-   private Players(){
-      this.credits = null;
-      this.rank = null;
-      this.money = null;
-      this.rehearsalVal = null;
-      this.name = null;
-   }
-   
    public Players getPlayer(){
       return this.Player;
    }
    
-   public void setPlayer() {
-      
-   }
+  public int getRank() {
+      return this.rank;
+  }
+  public void setRank(int n) {
+      this.rank = this.rank + n;
+  }
+  
+  public int getCredits() {
+      return this.credits;
+  } 
+  
+  public void setCredits(int n) {
+      this.credits = this.credits + n;
+  }
+  
+  public double getMoney() {
+      return this.money;
+  }
+  
+  public void setMoney(double n) {
+      this.money = this.money + n;
+  }
+  
+  public int getRehearsalVal() {
+      return this.rehearsalVal;
+  }
+  
+  public void setRehearsalVal(int n) {
+      this.rehearsalVal = n;
+  }
+  
+  public void addRehearsal(int rehearsalValMax) {
+      if (this.rehearsalVal < rehearsalValMax){
+         this.rehearsalVal++;
+      } else {
+         System.out.println("Max rehearsals reached.")
+      }
+  }
    
 }
