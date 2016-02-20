@@ -17,7 +17,7 @@ public class Players {
    }
    
    public Players getPlayer(){
-      return this.Player;
+      return this;
    }
    
   public int getRank() {
@@ -55,7 +55,7 @@ public class Players {
       if (this.rehearsalVal < rehearsalValMax){
          this.rehearsalVal++;
       } else {
-         System.out.println("Max rehearsals reached.")
+         System.out.println("Max rehearsals reached.");
       }
   }
    
