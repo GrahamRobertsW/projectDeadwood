@@ -8,8 +8,9 @@ public class MainStTile{
 
 	MainStTile(int pos){
 		for (int i=0; i<names.length; i++){
-		   Room temp=new Room(names[i], tempRoles[i], shots[i]);
+			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			this.Rooms.put(temp.getName(), temp);
 		}
+		This.outDoors={Rooms.get("Main Street"),
+		}
 	}
-}

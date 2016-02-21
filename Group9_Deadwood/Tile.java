@@ -14,15 +14,15 @@ public class Tile{
 	//    _|          |_
 	//    7            2
 	//    _            _
-	//     |          |
-	//     |          |  
 	//    _|          |_
    //    6            3 
 	//    _  _______   _
 	//     |5|      |4|
 
-	private String[] doors;
-   private String[] outDoors;
+	private Room[] doors;
+   private Room[] outDoors;
+   
+
 }   
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
