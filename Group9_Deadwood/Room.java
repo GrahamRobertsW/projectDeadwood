@@ -6,8 +6,8 @@ public class Room{
    private int shots;
 	private int maxShots;
 	private HashMap<String, Role> extraRoles;
-	private String name;
 	private Scene Scene;
+	private String name;
 
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
@@ -16,6 +16,14 @@ public class Room{
 		for (Role R : Roles){
 			extraRoles.put(R.getName(),R);
 		}
+	}
+
+	Room(String N){
+		this.name=N;
+		this.shots=NULL:
+		this.maxShots=NULL:
+		this.extraRoles=NULL;
+		this.scene = NULL:
 	}
 
 	public String getName(){

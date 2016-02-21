@@ -11,6 +11,6 @@ public class MainStTile{
 			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			this.Rooms.put(temp.getName(), temp);
 		}
-		This.outDoors={Rooms.get("Main Street"),
+		This.outDoors={Rooms.get("Main Street"),Rooms.get("Main Street"),Rooms.get("Main Street"),Rooms.get("Trailers"),Rooms.get("Trailers"),Rooms.get("Saloon"),Rooms.get("Saloon")};
 		}
 	}

@@ -10,5 +10,6 @@ public class SecretTile extends Tile{
 			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			this.Rooms.put(temp.getName(), temp);
 		}
+		this.Rooms.put(new Room("Casting Office"));
 	}
 }
