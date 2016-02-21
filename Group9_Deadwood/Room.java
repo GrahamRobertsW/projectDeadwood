@@ -7,6 +7,7 @@ public class Room{
 	private int maxShots;
 	private HashMap<String, Role> extraRoles;
 	private String name;
+	private Scene Scene;
 
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
@@ -35,5 +36,11 @@ public class Room{
 		return this.shots;
 	}
 
+   public getBudget(){
+		return this.Scene.getBudget();
+	}
 
+   public success(){
+		return;
+	}
 }
