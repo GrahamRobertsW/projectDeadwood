@@ -1,14 +1,14 @@
 package Group9_Deadwood;
 import java.util.Random.*;
 
-public class role{
+public class Role{
 	private int rank;
 	private int taken;
 	private int star;
 	private String name;
 	private String quip;
 
-	role(String N,String Q,int R,int S){
+	Role(String N,String Q,int R,int S){
 		this.name=N;
 		this.quip=Q;
 		this.rank=R;
@@ -34,5 +34,10 @@ public class role{
 
 	public void setPlayer(){
 		this.taken=1;
+		return;
+	}
+
+	public int isStarring(){
+		return this.star;
 	}
 }
