@@ -34,5 +34,10 @@ public class Role{
 
 	public void setPlayer(){
 		this.taken=1;
+		return;
+	}
+
+	public int isStarring(){
+		return this.star;
 	}
 }
