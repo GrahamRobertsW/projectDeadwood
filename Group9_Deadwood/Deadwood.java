@@ -39,7 +39,7 @@ public class Deadwood {
 		TrainTile = new TrainTile((tileorder+3) % 3);
 		
 		//Set player count and initialize
-		System.out.print("How many players?");
+		System.out.println("How many players?");
 		NUMBER_OF_PLAYERS = user_input.next();
 		
 		for(int i; i < NUMBER_OF_PLAYERS; i++){
@@ -49,25 +49,45 @@ public class Deadwood {
 		//Begin the game
 		CURRENT_TURN = 0;
 		CURRENT_DAY = 0;
+		SCENE_COUNT = 0;
 		setDay(CURRENT_DAY);
 		setTurn(CURRENT_TURN);
 		while(CURRENT_DAY < 3){
-			while(Scene.getSceneNumber < 9) {
-				System.out.print("Work, move, or upgrade?(w/m/u)");
+			while(SCENE_COUNT < 9) {
+				System.out.println("Work, move, or upgrade?(m/w/u)");
 				Scanner.user_input = new Scanner (System.in);
 				char input = user_input.next();
 				
 				//current turn options
-				switch (user_input) {
-					case 1: input = "w";
-						//work
+				switch(input) {
+					case 'm': //move stuff
+						//check if on a role
+						System.out.println("direction? up, left, down, right.(w/a/s/d)");
+						char direction = user_input.next();
+						
+						//check valid direction
+						//set room
+						//set role?
+						//read card?
+
 						break;
-					case 2: input = "m";
-						//move
+					case 'w': //work stuff
+						//check if working on a role
+						System.out.println("Act or rehearse?(a/r)");
+						char work = user_input.next();
+						//act
+						//rehearse
 						break;
-					case 3: input = "u";
+					case 'u': //upgrade stuff
+						//check room
+						System.out.println("How much do you want to raise your rank by? (enter a number)");
+						int upgrade = user_input.next();
+						//check if eligible
 						//upgrade
+						//check if player has moved or worked this turn.
+							//if not, repeat.
 						break;
+					//invalid input case
 				}
 				//new turn
 				setTurn(CURRENT_TURN++)
@@ -115,18 +135,18 @@ public class Deadwood {
 		
 	}
 	
-	public int calculateScore(Players player){
+	private int calculateScore(Players player){
 		return player.getMoney() + player.getCredits() +(player.getRank() * 5);
 	}
 	
-	public void setTurn(int turn){
+	private void setTurn(int turn){
 		CURRENT_PLAYER = TURN_ORDER[turn];
 	}
 	public Player getTurn(){
 		return CURRENT_PLAYER.getPlayer();
 	}
 	
-	public void setDay(int day){
+	private void setDay(int day){
 		CURRENT_DAY = day;
 	}
 	
