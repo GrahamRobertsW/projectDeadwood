@@ -36,5 +36,9 @@ public class Scene{
 
 	}
 
+	public int getBudget(){
+		return this.budget;
+	}
+
 	
 }	

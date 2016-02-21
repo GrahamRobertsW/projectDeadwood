@@ -36,11 +36,11 @@ public class Room{
 		return this.shots;
 	}
 
-   public getBudget(){
+   public int getBudget(){
 		return this.Scene.getBudget();
 	}
 
-   public success(){
+   public void success(){
 		return;
 	}
 }
