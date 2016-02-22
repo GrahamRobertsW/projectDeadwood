@@ -1,5 +1,5 @@
 package Group9_Deadwood;
-import java.util.HashMap;
+import java.util.*;
 
 public class Tile{
 	private HashMap<String, Room> Rooms;
@@ -20,49 +20,52 @@ public class Tile{
 	//     |5|      |4|
 
    private Room[] outDoors;
-
+   private Board board;
 	public Room getRoom(int i){
 		return outDoors[i];
 	}
 
 	private int[] iDoors(Room R){
-		ArrayList<Room> list;
-		List<int> indecies;
+		ArrayList<Integer> indecies= new ArrayList<Integer>();
 		String name = R.getName();
 		for (int i=0; i<8; i++){
 			if (name == outDoors[i].getName()){
-				List.add(i);
+				indecies.add(i);
          }
-      return List.toArray(int[]);
+		}
+		int tempsize=indecies.size();
+		int[] DoorList=new int[tempsize];
+      for(int j=0; j<tempsize; j++){
+			DoorList[j]=(int)indecies.get(j);
       }
-   }
+      return DoorList;
+	}
 
 	private boolean RoomCMP(Room a, Room b){
 		return(a.getName().equals(b.getName()));
 	}
 
-   private void insertIntoDoors(Room new, ArrayList<Room> list, Room me){
-		if (!(RoomCMP(new, me)||list.contains(R))){
-         list.add(R);
+   private void insertIntoDoors(Room newRoom, ArrayList<Room> list, Room me){
+		if (!(RoomCMP(newRoom, me)||list.contains(newRoom))){
+         list.add(newRoom);
 		}
 		return;
 	}
-   private void vert(int[] list, Room R){
-	   <? extends Tile> Temp;
+   private void vert(ArrayList<Room> list, Room R, int[] doors){
 	   if (pos<2){
-		   Temp=Board.getTile(pos+2);
-         for (int i: list){
+		   Tile Temp=board.getTile(pos+2);
+         for (int i: doors){
 				switch(i){
 					case 0:
 						insertIntoDoors(outDoors[6], list, R);
-						break
+						break;
 					case 1:
                   insertIntoDoors(outDoors[5], list, R);
-						break
+						break;
 					case 4:
 						insertIntoDoors(Temp.getRoom(1), list, R);
 						insertIntoDoors(outDoors[1], list, R);
-						break
+						break;
 					case 5:
 						insertIntoDoors(Temp.getRoom(0), list, R);
 						insertIntoDoors(outDoors[0], list, R);
@@ -73,9 +76,9 @@ public class Tile{
 			}
 		}
       else{
-			Temp=Board.getTile(pos-2);
-			for (int i: list){
-				switch{
+			Tile Temp=board.getTile(pos-2);
+			for (int i: doors){
+				switch(i){
 					case 0:
                   insertIntoDoors(Temp.getRoom(6), list, R);
 						insertIntoDoors(outDoors[6], list, R);

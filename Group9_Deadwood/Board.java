@@ -1,7 +1,7 @@
 package Group9_Deadwood;
 import java.util.*;
 public class Board{
-	private HashMap<String, Object> tiles;
+	private HashMap<String, Tile> tiles;
 	private String[] keys;
    Board(){
 		tiles.put("Train Station",new TrainTile(0));
@@ -10,7 +10,7 @@ public class Board{
 		tiles.put("Secret Hideout",new SecretTile(3));
 		keys = new String[] {"Train Station", "Main Street", "Hotel", "Secret Hideout"};
 	}
-   public Object getTile(int i){
+   public Tile getTile(int i){
 	   String key = keys[i];
 		return tiles.get(key);
 	}
