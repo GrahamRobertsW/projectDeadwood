@@ -1,0 +1,14 @@
+#if first time branching
+	git checkout -b name
+#else
+	git checkout name
+#fi
+make edits
+git add -A 
+#or
+git add file names (if not lazy)
+git commit -m msg
+git checkout master
+git pull
+git merge name
+git push

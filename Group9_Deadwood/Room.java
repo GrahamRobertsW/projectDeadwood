@@ -20,10 +20,10 @@ public class Room{
 
 	Room(String N){
 		this.name=N;
-		this.shots=NULL:
-		this.maxShots=NULL:
-		this.extraRoles=NULL;
-		this.scene = NULL:
+		this.shots=0;
+		this.maxShots=0;
+		this.extraRoles=null;
+		this.Scene = null;
 	}
 
 	public String getName(){
