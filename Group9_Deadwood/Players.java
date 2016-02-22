@@ -62,13 +62,25 @@ public class Players {
       this.rehearsalVal = n;
   }
   
-  public void addRehearsal(int rehearsalValMax) {
-      if (this.rehearsalVal < rehearsalValMax){
-         this.rehearsalVal++;
-      } else {
-         //Error handling should be updated at some point 
-         System.out.println("Max rehearsals reached.");
-      }
+  public boolean rehearsal() {
+      if (this.role != null) {
+         int rehearsalValMax = room.getBudget();
+         if (this.rehearsalVal < rehearsalValMax){
+            this.rehearsalVal++;
+            return true;
+         } else {
+            //Error handling should be updated at some point 
+            System.out.println("Max rehearsals reached.");
+            return false;
+         }
+     } else {
+         System.out.println("Please take a role before rehearsing");
+         return false;
+     }    
+  }
+  
+  public void reset() {
+      this.rehearsalVal = 0;
   }
   
   public Room getRoom() {
@@ -87,7 +99,9 @@ public class Players {
       this.role = n;
   }
   
-  public void act() {
+  
+  public boolean act() {
+   if (this.role != null) {
       int budget = this.room.getBudget();
       Random dice = new Random();
       int roll = dice.nextInt(5) + 1;
@@ -107,7 +121,33 @@ public class Players {
          } else {
             this.money++;
          }
-      }   
-  }
+      } 
+      return true; 
+   } else {
+      System.out.println("Please take a role before acting");
+      return false;
+   }
+ } 
+      
+   public void rankMoney(int rank) {
+      int cost = rank*rank + rank -2;
+      if (this.money >= cost) {
+          this.money-= cost;
+          this.rank = rank;
+      } else {
+          System.out.println("Not enough money to rank up! Choose another rank, come back later, or try using credits.");
+      }
+   }
+      
+      public void rankCredits(int rank){
+        int cost = (rank - 1) * 5;
+        if (this.credits >= cost) {
+            this.credits -= cost;
+            this.rank = rank;
+        } else {
+            System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
+        }
+      }
+  
    
 }
