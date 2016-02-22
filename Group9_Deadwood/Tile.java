@@ -26,35 +26,49 @@ public class Tile{
 	}
 
 	private int[] iDoors(Room R){
-		ArrayList<Room> = list;
-		List<int> = indecies;
+		ArrayList<Room> list;
+		List<int> indecies;
 		String name = R.getName();
-		for (int 1=0; i<8; i++){
-			if name == outDoors[i].getName(){
+		for (int i=0; i<8; i++){
+			if (name == outDoors[i].getName()){
 				List.add(i);
+         }
+      return List.toArray(int[]);
       }
-      return List.toArray(int[0]);
    }
-}
 
-   private vert(int[] list, Room R){
+	private boolean RoomCMP(Room a, Room b){
+		return(a.getName().equals(b.getName()));
+	}
+
+   private void insertIntoDoors(Room new, ArrayList<Room> list, Room me){
+		if (!(RoomCMP(new, me)||list.contains(R))){
+         list.add(R);
+		}
+		return;
+	}
+   private void vert(int[] list, Room R){
 	   <? extends Tile> Temp;
-	   if pos<2{
+	   if (pos<2){
 		   Temp=Board.getTile(pos+2);
          for (int i: list){
 				switch(i){
 					case 0:
 						insertIntoDoors(outDoors[6], list, R);
+						break
 					case 1:
                   insertIntoDoors(outDoors[5], list, R);
+						break
 					case 4:
-						insertIntoDoors(Temp.getRoom[1], list, R);
-						insertIntoDoorsw(outDoors[1], list, R);
+						insertIntoDoors(Temp.getRoom(1), list, R);
+						insertIntoDoors(outDoors[1], list, R);
+						break
 					case 5:
-						insertIntoDoors(Temp.getRoom[0], list, R);
+						insertIntoDoors(Temp.getRoom(0), list, R);
 						insertIntoDoors(outDoors[0], list, R);
+						break;
 					default:
-					
+					break;
 				}
 			}
 		}
@@ -63,8 +77,29 @@ public class Tile{
 			for (int i: list){
 				switch{
 					case 0:
-         
-       
+                  insertIntoDoors(Temp.getRoom(6), list, R);
+						insertIntoDoors(outDoors[6], list, R);
+						break;
+					case 1:
+                  insertIntoDoors(Temp.getRoom(5), list, R);
+						insertIntoDoors(outDoors[5], list, R);
+						break;
+					case 5:
+						insertIntoDoors(outDoors[1], list, R);
+						break;
+					case 6:
+						insertIntoDoors(outDoors[0], list, R);
+						break;
+					default:
+						break;
+					}
+			}
+		}
+		return;
+	}
+
+
+
 }   
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
