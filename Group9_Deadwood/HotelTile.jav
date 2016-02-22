@@ -14,5 +14,6 @@ public class HotelTile extends Tile{
 			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			this.Rooms.put(temp.getName(), temp);
 		}
+		this.outDoors={Rooms.get("Bank"), Rooms.get("Hotel"), Rooms.get("Hotel"), Rooms.get("Hotel"), Rooms.get("Hotel"), Rooms.get("Church"), Rooms.get("Church"), Rooms.get("Bank")}
 	}
 }
