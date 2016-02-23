@@ -7,7 +7,7 @@ public class Scene{
 	private int budget;
 	private HashMap<String, Role> Roles;
 	private int index;
-      
+	private boolean use;      
 	Scene(String input){
 		int rank;
 		String[] temp;
@@ -39,6 +39,14 @@ public class Scene{
 	public int getBudget(){
 		return this.budget;
 	}
+/*
+	public boolean used(){
+		return this.use;
+	}
 
+	public boolean used(boolean value){
+		this.use = value;
+	}
+*/
 	
 }	

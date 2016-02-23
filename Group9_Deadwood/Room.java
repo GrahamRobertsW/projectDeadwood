@@ -56,4 +56,13 @@ public class Room{
    public void success(){
 		return;
 	}
+/*
+	public boolean getSceneUsed(){
+		return this.Scene.used();
+	}
+	
+	public void setSceneUsed(boolean value){
+		this.Scene.used(value);
+	}
+*/
 }
