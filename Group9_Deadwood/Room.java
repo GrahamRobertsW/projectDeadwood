@@ -9,7 +9,7 @@ public class Room{
 	private Scene Scene;
 	private String name;
 	private Room[] doors;
-
+//	private Scene[] Scenes;
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
 		this.maxShots=S;
@@ -57,6 +57,19 @@ public class Room{
 		return;
 	}
 /*
+	public void createScenes(){
+		
+		try(Scanner input = new Scanner(new File(scenes.txt))){
+			while(input.hasNextLine()){
+				string[] lines = input.nextLine().split("|");
+			}
+		} catch (FileNotFoundException ex) { System.err.println("Error: File not found.");}
+
+		for(i=0;i < 39; i++){
+			Scenes[i] = new Scene();
+		}
+	}
+
 	public boolean getSceneUsed(){
 		return this.Scene.used();
 	}
