@@ -64,5 +64,9 @@ public class Room{
 	public void setSceneUsed(boolean value){
 		this.Scene.used(value);
 	}
+
+	public void getScene(){
+		System.out.print("%s : %s.", this.Scene.getName() this.Scene.getDesc());
+	}
 */
 }
