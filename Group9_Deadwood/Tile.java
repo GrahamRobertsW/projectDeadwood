@@ -6,7 +6,7 @@ public class Tile{
 	//The four quarters of the board are named as follows clockwise and 0-indexed
 	// 0|1
 	// 2|3
-	// 
+	//
    private int pos;
 
 	//Doors follow array like naming scheme going clockwise from top-right
@@ -15,7 +15,7 @@ public class Tile{
 	//    7            2
 	//    _            _
 	//    _|          |_
-   //    6            3 
+   //    6            3
 	//    _  _______   _
 	//     |5|      |4|
 
@@ -101,9 +101,36 @@ public class Tile{
 		return;
 	}
 
+   private void Hor(ArrayList<Room> list, Room R, int[] doors){
+      if ((pos%2)<1){
+			Tile temp = board.getTile;
+         for (int i: doors){
+				switch(i){
+					case 2:
+	               insertIntoDoors(Temp.getRoom(7), list, R);
+						insertIntoDoors(outDoors[7], list, R);
+                  break;
+					case 3:
+						insertIntoDoors(Temp.getRoom(6), list, R);
+						insertIntoDoors(outDoors[6], list, R);
+						break;
+					case 6:
+						insertIntoDoors(outDoors[3], list, R);
+						break;
+					case 7:
+						insertIntoDoors(outDoors[2], list, R);
+						break;
+					default:
+						break;
+            }
+			}
+		}
+		else{
+			for (int j :doors){
+            switch(i){
+					case 0:<F8>
 
-
-}   
+}
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
 	//	this.rooms = new HashMap<String, Room>
