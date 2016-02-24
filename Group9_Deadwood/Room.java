@@ -8,6 +8,7 @@ public class Room{
 	private HashMap<String, Role> extraRoles;
 	private Scene Scene;
 	private String name;
+	private Room[] doors;
 
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
@@ -24,6 +25,10 @@ public class Room{
 		this.maxShots=0;
 		this.extraRoles=null;
 		this.Scene = null;
+	}
+
+	public setDoors(Room[] newDoors){
+		this.doors=newDoors;
 	}
 
 	public String getName(){
