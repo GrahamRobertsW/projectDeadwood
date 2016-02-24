@@ -7,7 +7,7 @@ public class Scene{
 	private int budget;
 	private HashMap<String, Role> Roles;
 	private int index;
-      
+      	private List<Players> players = new List<Players>
 	Scene(String input){
 		int rank;
 		String[] temp;
@@ -39,6 +39,10 @@ public class Scene{
 	public int getBudget(){
 		return this.budget;
 	}
-
+	
+	public void addPlayer(Player player){
+		
+		players.add(player);
+	}
 	
 }	

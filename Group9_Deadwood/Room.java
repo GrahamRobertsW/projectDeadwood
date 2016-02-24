@@ -49,6 +49,6 @@ public class Room{
 	}
 
    public void success(){
-		return;
+		if this.Scene.
 	}
-}
+
