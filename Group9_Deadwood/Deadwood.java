@@ -14,21 +14,27 @@ public class Deadwood {
 	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
 
 	public static void main(String[] args) {
-		
+		newGame();
+	}
+	
+	private void newGame(){
 		Scanner user_input = new Scanner(System.in);
-		
 		System.out.print("Start a new game? (y/n)");
 		char new_game = user_input.next();
 		if(new_game == 'y'){
+			// initialize variables here.
+			NUMBER_OF_PLAYERS = null;
+			CURRENT_DAY = 0;
+			TURN_ORDER = null;
+			CURRENT_PLAYER = null;
+			SCENE_COUNT = 0;
 			startGame();
 		} else {
 			System.exit(0);
 		}
-		
 	}
 	
 	private void startGame(){
-		
 		//Initialize the board pseudo-randomly
 		/*int tile_order = (int)(Math.random() * 4);
 		HotelTile = new HotelTile(tile_order);
@@ -36,10 +42,7 @@ public class Deadwood {
 		SecretTile = new SecretTile((tileorder+2) % 3);
 		TrainTile = new TrainTile((tileorder+3) % 3);*/
 		
-		HotelTile = new HotelTile();
-		MainStTile = new MainStTile();
-		SecretTile = new SecretTile();
-		TrainTile = new TrainTile();
+		Board = new Board();
 		
 		//Set player count and initialize
 		System.out.println("How many players?");
@@ -51,23 +54,19 @@ public class Deadwood {
 		}
 		
 		//Begin the game
-		CURRENT_DAY = 0;
-		SCENE_COUNT = 0;
-		setDay(CURRENT_DAY);
 		setTurn(0);
 		while(CURRENT_DAY < 3){
 			while(SCENE_COUNT < 9) {
-				System.out.println(CURRENT_PLAYER.getName() + "'s turn!");
-				boolean ValidEntry = false;
-				boolean HasMoved = false;
-				boolean HasWorked = false;
-				while(!ValidEntry){
+				System.out.println(CURRENT_PLAYER.getName() + "'s turn. Enter an action.");
+				boolean Valid_Entry = false;
+				boolean Has_Moved = false;
+				boolean Has_Worked = false;
+				while(!Valid_Entry){
 					System.out.printline("Enter a command.");
 					Scanner.user_input = new Scanner (System.in);
 					string input = user_input.next();
-					
 					//current turn options
-					switch(user_input) {
+					switch (user_input) {
 						case "move":
 							string room_input = user_input.next();
 							//check if valid entry
@@ -75,31 +74,35 @@ public class Deadwood {
 								System.out.printline("Invalid room name.");
 								break;
 							}
-								
 							//check if on a role
-							if (CURRENT_PLAYER.getRole() != NULL || HasMoved == true) {
-								System.out.println("You can't move at this time.");
+							if (CURRENT_PLAYER.getRole() != NULL) {
+								System.out.println("You are on a role and can't move at this time.");
 								break;
 							}
+							if (Has_Moved == true){
+								System.out.println("You have already moved this turn.");
+								break;
+							}
+							//check valid direction.
 							
-							//check valid direction
-							
-							//set room
+							//move
 							CURRENT_PLAYER.setRoom(room_input);
-							HasMoved = true;
-							
-							//read card?
+							Has_Moved = true;
+							//read card
+							if(!CURRENT_PLAYER.getRoom.getSceneUsed()){
+								CURRENT_PLAYER.getRoom.getSceneUsed(true);
+								SCENE_COUNT++;
+							}
+							System.out.println("The current scene is " + CURRENT_PLAYER.getRoom.getScene());
 							break;
 							
 						case "work":
 							string role_input = user_input.next();
-							
 							//check if working on a role
 							if (CURRENT_PLAYER.getRole() != NULL) {
 								System.out.println("You are already working a role.");
 								break;
 							}
-							
 							//set a role
 							CURRENT_PLAYER.setRole(role_input);
 							break;
@@ -108,79 +111,60 @@ public class Deadwood {
 							//check room
 							if(CURRENT_PLAYER.getRoom().equals("Casting Office")){
 								string currency_input = user_input.next();
-								switch(currency_input){
-								case "$":
-									int dollar_input = user_input.nextInt();
-									
-									//check if enough money
-									/*
-									if(!checkDollarUpgrade(CURRENT_PLAYER.getRank(), CURRENT_PLAYER.getMoney(), dollar_input)){
-										System.out.println("Not enough dollars.");
+								switch (currency_input){
+									case "$":
+										int dollar_input = user_input.nextInt();
+										CURRENT_PLAYER.rankMoney(dollar_input);
+										
+									case "cr":
+										int credit_input = user_input.nextInt();
+										CURRENT_PLAYER.rankCredits(credit_input);
+										
+									default:
+										System.out.println("Invalid input.");
 										break;
-									} else {
-										CURRENT_PLAYER.setRank(dollar_input);
-										CURRENT_PLAYER.setMoney((dollar_input^2 + dollar_input - 2)  - CURRENT_PLAYER.getMoney());
-										break;
-									}*/
-									
-								case "cr":
-									int credit_input = user_input.nextInt();
-									
-									//check if enough credits
-									/*if(!checkCreditUpgrade(CURRENT_PLAYER.getRank(), CURRENT_PLAYER.getCredits(), credit_input)){
-										System.out.println("Not enough credits.");
-										break;
-									} else {
-										CURRENT_PLAYER.setRank(rank_input);
-										CURRENT_PLAYER.setCredits((credit_input * 5) - CURRENT_PLAYER.getCredits());
-										break;
-									}*/
-									
-								default:
-									System.out.println("Invalid input.");
-									break;
 								}
 							} else {
-								System.out.println("You are not in the Casting Office");
+								System.out.println("You are not in the Casting Office.");
 								break;
 							}
 							break;
 							
 						case "who":
-							System.out.println(CURRENT_PLAYER.getName() + CURRENT_PLAYER.getRole());
+							System.out.println(CURRENT_PLAYER.getName() + " " + CURRENT_PLAYER.getRole());
 							break;
 							
 						case "where":
-							System.out.println(CURRENT_PLAYER.getRoom() + CURRENT_PLAYER.getScene());
+							System.out.println(CURRENT_PLAYER.getRoom() + " " + CURRENT_PLAYER.getScene());
 							break;
 							
 						case "rehearse":
-							if(HasWorked == true){
+							if(Has_Worked == true){
 								System.out.println("You've already worked this turn.");
 								break;
 							}
-							if(!CURRENT_PLAYER.rehearse()) {
+							if(!CURRENT_PLAYER.rehearsal()) {
 								break;
 							} else {
-								HasWorked = true;
+								Has_Worked = true;
 								break;
 							}
 							
 						case "act":
-							if(HasWorked == true){
+							if(Has_Worked == true){
 								System.out.println("You've already worked this turn.");
 								break;
 							}
 							if(!CURRENT_PLAYER.act()){
 								break;
 							} else {
-								HasWorked = true;
+								Has_Worked = true;
 								break;
 							}
 							
 						case "end":
 							setTurn(CURRENT_PLAYER++);
-							ValidEntry = true;
+							Valid_Entry = true;
 							break;
 							
 						default:
@@ -190,12 +174,10 @@ public class Deadwood {
 				}
 			}
 			setDay(CURRENT_DAY++);
-			//Create new scenes
+			//Create new scenes from room class?
 		}
-		
 		//Start end game process
-		endGame();
-		
+		endGame();	
 	}
 	
 	private void endGame(){
@@ -203,7 +185,6 @@ public class Deadwood {
 		for(int i; i < NUMBER_OF_PLAYERS; i++){
 			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]);
 		}
-		
 		String winner = score.get(TURN_ORDER[0]);
 		for(int i = 1; i < score.length; i++){
 			if(score.get(TURN_ORDER[i]) > max){
@@ -211,24 +192,7 @@ public class Deadwood {
 			}
 		}
 		System.out.print(winner + " is the winner!");
-		
-		// initialize variables to 0 here.
-		
-		Scanner user_input = new Scanner(System.in);
-		
-		System.out.print("Start a new game? (y/n)");
-		char new_game = user_input.next();
-		if(new_game == 'y'){
-			NUMBER_OF_PLAYERS = null;
-			CURRENT_DAY = null;
-			TURN_ORDER = null;
-			CURRENT_PLAYER = null;
-			SCENE_COUNT = null;
-			startGame();
-		} else {
-			System.exit(0);
-		}
-		
+		newGame();
 	}
 	
 	private int calculateScore(Players player){
@@ -238,6 +202,7 @@ public class Deadwood {
 	private void setTurn(int turn){
 		CURRENT_PLAYER = TURN_ORDER[turn];
 	}
+	
 	public Player getTurn(){
 		return CURRENT_PLAYER.getPlayer();
 	}
@@ -245,15 +210,4 @@ public class Deadwood {
 	private void setDay(int day){
 		CURRENT_DAY = day;
 	}
-	
-	/*
-	private boolean checkDollarUpgrade(int currentRank, int currentDollars, int newRank){
-		
-	}
-	
-	private boolean checkCreditUpgrade(int currentRank, int currentCredits, int newRank){
-		
-	}
-	*/
-
 }
