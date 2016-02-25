@@ -107,8 +107,8 @@ public class Tile{
          for (int i: doors){
 				switch(i){
 					case 2:
-	               insertIntoDoors(Temp.getRoom(7), list, R);
-						insertIntoDoors(outDoors[7], list, R);
+	                                   insertIntoDoors(Temp.getRoom(7), list, R);
+					   insertIntoDoors(outDoors[7], list, R);
                   break;
 					case 3:
 						insertIntoDoors(Temp.getRoom(6), list, R);
@@ -127,8 +127,23 @@ public class Tile{
 		}
 		else{
 			for (int j :doors){
-            switch(i){
-					case 0:<F8>
+                           switch(j){
+			      case 2:
+                                 insertIntoDoors(outDoors[7], list, R);
+                                 break;
+                              case 3:
+                                 insertIntoDoors(outDoors[6], list, R);
+                                 break;
+                              case 6:
+                                 insertIntoDoors(outDoors[3], list, R);
+                                 insertIntoDoors(Temp.getRoom(3), list, R);
+                                 break;
+                              case 7:
+                                 insertIntoDoors(outDoors[2], list, R);
+                                 insertIntoDoors(Temp.fetRoom(2), list, R);
+                                 break;
+                              default:
+                                 break;
 
 }
 	//Tile(int position, HashMap<String,  R){
