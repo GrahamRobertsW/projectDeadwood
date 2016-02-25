@@ -139,15 +139,35 @@ public class Players {
       }
    }
       
-      public void rankCredits(int rank){
-        int cost = (rank - 1) * 5;
-        if (this.credits >= cost) {
-            this.credits -= cost;
-            this.rank = rank;
-        } else {
-            System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
-        }
+   public void rankCredits(int rank){
+     int cost = (rank - 1) * 5;
+     if (this.credits >= cost) {
+         this.credits -= cost;
+         this.rank = rank;
+     } else {
+         System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
+     }
+   }
+   
+   public boolean move() {
+      if (this.room.getShots() == 0) {
+         System.out.println("Scene complete. Choose a new room to move to");
+         System.out.println(this.room.getMoves());
+         Scanner user_choice = new Scanner;
+         Room newRoom = user_choice.next();
+         if (newRoom.isValid()) {
+            this.room = newRoom;
+            System.out.println("You are now in room " + this.room);
+            return true;
+         } else {
+            System.out.println("Not a valid room choice.");
+            return false;
+         }
+      } else {
+         System.out.println("Scene not yet complete. Act or rehearse until scene is complete then move.");
+         return false;
       }
+   }
   
    
 }
