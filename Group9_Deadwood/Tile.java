@@ -101,7 +101,7 @@ public class Tile{
 		return;
 	}
 
-   private void Hor(ArrayList<Room> list, Room R, int[] doors){
+   private void hor(ArrayList<Room> list, Room R, int[] doors){
 		Tile temp;
       if ((pos%2)<1){
 			temp = board.getTile(pos+1);
@@ -151,6 +151,16 @@ public class Tile{
    return;
       }
    }
+
+	public Room[] getRooms(Room R){
+		ArrayList<Room> list = new ArrayList<Room>();
+		int[] doors = iDoors(R);
+		vert(list, R, doors);
+		hor(list, R, doors);
+	   Room[] newArray=new Room[list.size()];
+		list.toArray(newArray);
+		return newArray;
+	}
 }
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
