@@ -153,7 +153,7 @@ public class Players {
       if (this.room.getShots() == 0) {
          System.out.println("Scene complete. Choose a new room to move to");
          System.out.println(this.room.getMoves());
-         Scanner user_choice = new Scanner;
+         Scanner user_choice = new Scanner();
          Room newRoom = user_choice.next();
          if (newRoom.isValid()) {
             this.room = newRoom;
