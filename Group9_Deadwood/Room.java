@@ -56,9 +56,14 @@ public class Room{
    public void success(){
 		if this.Scene.
 	}
-<<<<<<< HEAD
 
-=======
+   public void getMoves(){
+		return this.doors;
+	}
+
+	public void success(){
+		return;
+	}
 /*
 	public void createScenes(){
 		
