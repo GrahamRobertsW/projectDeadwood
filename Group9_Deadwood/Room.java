@@ -58,7 +58,7 @@ public class Room{
 		return this.Scene.getBudget();
 	}
 
-   public void getMoves(){
+   public void getDoors(){
 		return this.doors;
 	}
 
@@ -97,7 +97,7 @@ public class Room{
 	   return;
 	}
 
-	public HashMap<String, Room>{
+	public HashMap<String, Room> getMoves{
 		return this.rooms;
 	}
 /*
