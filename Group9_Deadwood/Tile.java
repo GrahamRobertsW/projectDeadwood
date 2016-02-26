@@ -167,6 +167,7 @@ public class Tile{
 		for (Room R : rooms){
 			doors=getRooms(R);
 			R.setDoors(doors);
+
 		}
 	   return;
 	}
