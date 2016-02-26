@@ -87,7 +87,8 @@ public class Deadwood {
 							//Check valid direction.
 							
 							//Move.
-							CURRENT_PLAYER.setRoom(room_input);
+							Room roomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							CURRENT_PLAYER.setRoom(roomInput);
 							Has_Moved = true;
 							//Read card.
 							//Check if moving to a room where the scene has already finished.
@@ -117,7 +118,7 @@ public class Deadwood {
 								System.out.println("Someone is already on this role.");
 								break;
 							}
-							//set a role
+							//Set role.
 							CURRENT_PLAYER.setRole(role_input);
 							break;
 							
@@ -173,7 +174,7 @@ public class Deadwood {
 							if(!CURRENT_PLAYER.act()){
 								break;
 							} else {
-								//check if scene completed
+								//Check if scene completed.
 								if(CURRENT_PLAYER.getRoom().checkSuccess() == true){
 									SCENE_COUNT++;
 								}
@@ -192,9 +193,9 @@ public class Deadwood {
 					}
 				}
 			}
-			setDay(CURRENT_DAY++);
+			CURRENT_DAY++;
 		}
-		//Start end game process
+		//Start end game process.
 		endGame();	
 	}
 	
@@ -223,10 +224,6 @@ public class Deadwood {
 	
 	public Player getTurn(){
 		return CURRENT_PLAYER.getPlayer();
-	}
-	
-	private void setDay(int day){
-		CURRENT_DAY = day;
 	}
 	
 	//Sets a new scene to a room if the current player goes into a new room
