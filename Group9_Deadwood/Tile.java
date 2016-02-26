@@ -21,6 +21,7 @@ public class Tile{
 
    private Room[] outDoors;
    private Board board;
+	private HashMap<String, Room> Rooms;
 	public Room getRoom(int i){
 		return outDoors[i];
 	}
@@ -164,7 +165,10 @@ public class Tile{
 
 	public void setDoors(){
       Room[] doors = null;
-		for (Room R : rooms){
+		for (Room R : outDoors){
+			insertIntoDoors(R, Rooms, null);
+		}
+		for (Room R : Rooms){
 			doors=getRooms(R);
 			R.setDoors(doors);
 
@@ -173,9 +177,10 @@ public class Tile{
 	}
 	
 	public Room findTrailers(){
-      return this.Rooms(:Trailers");
+      return this.Rooms.get("Trailers");
 	}
 }
+
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
 	//	this.rooms = new HashMap<String, Room>

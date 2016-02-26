@@ -7,6 +7,7 @@ public class Role{
 	private int star;
 	private String name;
 	private String quip;
+	private Players player;
 
 	Role(String N,String Q,int R,int S){
 		this.name=N;
@@ -14,6 +15,7 @@ public class Role{
 		this.rank=R;
 		this.star=S;
 		this.taken=0;
+		this.player=null;
 	}
 
 	public String getName(){
@@ -32,8 +34,9 @@ public class Role{
 		return this.taken;
 	}
 
-	public void setPlayer(){
+	public void setPlayer(Players P){
 		this.taken=1;
+		this.player=P;
 		return;
 	}
 
