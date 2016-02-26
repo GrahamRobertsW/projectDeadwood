@@ -1,8 +1,6 @@
 package Group9_Deadwood;
 
 import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 
 public class Players {
@@ -29,9 +27,6 @@ public class Players {
    
   public int getRank() {
       return this.rank;
-  }
-  public void setRank(int n) {
-      this.rank = this.rank + n;
   }
   
   public int getCredits() {
@@ -69,7 +64,6 @@ public class Players {
             this.rehearsalVal++;
             return true;
          } else {
-            //Error handling should be updated at some point 
             System.out.println("Max rehearsals reached.");
             return false;
          }
@@ -128,27 +122,39 @@ public class Players {
       return false;
    }
  } 
-      
-   public void rankMoney(int rank) {
-      int cost = rank*rank + rank -2;
+   /* rankMoney and rankCredits take in the rank the player would like to change their rank to.
+      They check to see if the player has enough money or credits to buy this rank, and if the player
+      has the means to they change the rank to the input and decreas the player's money/credits. 
+      Otherwise, it prints a message explaining the error to the user and returns false to Deadwood.   
+   */   
+   public boolean rankMoney(int newRank) {
+      int cost = newRank*newRank + newRank -2;
       if (this.money >= cost) {
           this.money-= cost;
-          this.rank = rank;
+          this.rank = newRank;
+          return true;
       } else {
           System.out.println("Not enough money to rank up! Choose another rank, come back later, or try using credits.");
+         return false;
       }
    }
       
-   public void rankCredits(int rank){
+   public boolean rankCredits(int newRank){
      int cost = (rank - 1) * 5;
      if (this.credits >= cost) {
          this.credits -= cost;
-         this.rank = rank;
+         this.rank = newRank;
+         return true;
      } else {
          System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
+         return false;
      }
    }
    
+   /* Move provides the user with a list of rooms they can go to if they are on a completed scene.
+      User inputs a room, and move checks it's a valid move. If valid, the player's room is changed. 
+      If not, user is informed of their error and Deadwood handles it from there.   
+   */
    public boolean move() {
       if (this.room.getShots() == 0) {
          System.out.println("Scene complete. Choose a new room to move to");
@@ -157,7 +163,7 @@ public class Players {
          Room newRoom = user_choice.next();
          if (newRoom.isValid()) {
             this.room = newRoom;
-            System.out.println("You are now in room " + this.room);
+            System.out.println("You are now in the room " + this.room);
             return true;
          } else {
             System.out.println("Not a valid room choice.");
