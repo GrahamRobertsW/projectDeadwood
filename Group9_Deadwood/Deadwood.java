@@ -11,7 +11,7 @@ public class Deadwood {
 	private Players[] TURN_ORDER;
 	private Players CURRENT_PLAYER;
 	private int SCENE_COUNT;
-	private String[] PLAYER_NAMES = new String[]{"blue","red","yellow","orange","green","violet","pink","cyan"}
+	private String[] PLAYER_NAMES = new String[]{"blue","red","yellow","orange","green","violet","pink","cyan"};
 
 
 	public static void main(String[] args) {
@@ -92,16 +92,12 @@ public class Deadwood {
 //							}
 							//Check if already on a role.
 							
-<<<<<<< HEAD
-=======
 							//Check for valid entry.
 							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
 								System.out.printline("Invalid room name.");
 								break;
 							}
 							//Check if already on a role.
-=======
->>>>>>> 8223cf42fa0c7b18fdb54aacacbc207965d0e08d
 							if (CURRENT_PLAYER.getRole() != NULL) {
 								System.out.println("You are on a role and can't move at this time.");
 								break;
@@ -118,15 +114,12 @@ public class Deadwood {
 							//Move.
 							
 							CURRENT_PLAYER.setRoom(RoomInput);
-<<<<<<< HEAD
 
 							//Check valid direction.
 							
 							//Move.
 							Room roomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 							CURRENT_PLAYER.setRoom(roomInput);
-=======
->>>>>>> 8223cf42fa0c7b18fdb54aacacbc207965d0e08d
 							Has_Moved = true;
 							//Read card.
 							//Check if moving to a room where the scene has already finished.
@@ -197,7 +190,7 @@ public class Deadwood {
 								System.out.println("You've already worked this turn.");
 								break;
 							}
-							if(!CURRENT_PLAYER.rehearsal()) {
+						if(!CURRENT_PLAYER.rehearsal()) {
 								break;
 							} else {
 								Has_Worked = true;
@@ -238,14 +231,14 @@ public class Deadwood {
 	}
 	
 	private void endGame(){
-		private HashMap <Player, int> score;
+		HashMap <Player, int> score;
 		for(int i; i < NUMBER_OF_PLAYERS; i++){
-			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]);
+			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]));
 		}
 		String winner = score.get(TURN_ORDER[0]);
 		for(int i = 1; i < score.length; i++){
 			if(score.get(TURN_ORDER[i]) > max){
-				winner = score.get(TURN_ORDER[i].getName())
+				winner = score.get(TURN_ORDER[i].getName());
 			}
 		}
 		System.out.print(winner + " is the winner!");
