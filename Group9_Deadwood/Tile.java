@@ -101,17 +101,18 @@ public class Tile{
 		return;
 	}
 
-   private void Hor(ArrayList<Room> list, Room R, int[] doors){
+   private void hor(ArrayList<Room> list, Room R, int[] doors){
+		Tile temp;
       if ((pos%2)<1){
-			Tile temp = board.getTile;
+			temp = board.getTile(pos+1);
          for (int i: doors){
 				switch(i){
 					case 2:
-	                                   insertIntoDoors(Temp.getRoom(7), list, R);
-					   insertIntoDoors(outDoors[7], list, R);
+	               insertIntoDoors(temp.getRoom(7), list, R);
+						insertIntoDoors(outDoors[7], list, R);
                   break;
 					case 3:
-						insertIntoDoors(Temp.getRoom(6), list, R);
+						insertIntoDoors(temp.getRoom(6), list, R);
 						insertIntoDoors(outDoors[6], list, R);
 						break;
 					case 6:
@@ -126,25 +127,50 @@ public class Tile{
 			}
 		}
 		else{
+			temp = board.getTile(pos-1);
 			for (int j :doors){
-                           switch(j){
-			      case 2:
-                                 insertIntoDoors(outDoors[7], list, R);
-                                 break;
-                              case 3:
-                                 insertIntoDoors(outDoors[6], list, R);
-                                 break;
-                              case 6:
-                                 insertIntoDoors(outDoors[3], list, R);
-                                 insertIntoDoors(Temp.getRoom(3), list, R);
-                                 break;
-                              case 7:
-                                 insertIntoDoors(outDoors[2], list, R);
-                                 insertIntoDoors(Temp.fetRoom(2), list, R);
-                                 break;
-                              default:
-                                 break;
+            switch(j){
+					case 2:
+						insertIntoDoors(outDoors[7], list, R);
+						break;
+					case 3:
+						insertIntoDoors(outDoors[6], list, R);
+						break;
+					case 6:
+						insertIntoDoors(outDoors[3], list, R);
+						insertIntoDoors(temp.getRoom(3), list, R);
+						break;
+					case 7:
+						insertIntoDoors(outDoors[2], list, R);
+						insertIntoDoors(temp.getRoom(2), list, R);
+						break;
+					default:
+						break;
+				}
+		   }
+   return;
+      }
+   }
 
+	public Room[] getRooms(Room R){
+		ArrayList<Room> list = new ArrayList<Room>();
+		int[] doors = iDoors(R);
+		vert(list, R, doors);
+		hor(list, R, doors);
+	   Room[] newArray=new Room[list.size()];
+		list.toArray(newArray);
+		return newArray;
+	}
+
+	public void setDoors(){
+      Room[] doors = null;
+		for (Room R : rooms){
+			doors=getRooms(R);
+			R.setDoors(doors);
+
+		}
+	   return;
+	}
 }
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;

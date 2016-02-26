@@ -1,8 +1,6 @@
 package Group9_Deadwood;
 
 import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 
 public class Players {
@@ -29,9 +27,6 @@ public class Players {
    
   public int getRank() {
       return this.rank;
-  }
-  public void setRank(int n) {
-      this.rank = this.rank + n;
   }
   
   public int getCredits() {
@@ -69,7 +64,6 @@ public class Players {
             this.rehearsalVal++;
             return true;
          } else {
-            //Error handling should be updated at some point 
             System.out.println("Max rehearsals reached.");
             return false;
          }
@@ -95,8 +89,8 @@ public class Players {
       return this.role;
   }
   
-  public void setRole(Role n) {
-      this.role = n;
+  public void setRole() {
+      setPlayer();
   }
   
   
@@ -128,38 +122,42 @@ public class Players {
       return false;
    }
  } 
-      
-   public void rankMoney(int rank) {
-      int cost = rank*rank + rank -2;
+   /* rankMoney and rankCredits take in the rank the player would like to change their rank to.
+      They check to see if the player has enough money or credits to buy this rank, and if the player
+      has the means to they change the rank to the input and decreas the player's money/credits. 
+      Otherwise, it prints a message explaining the error to the user and returns false to Deadwood.   
+   */   
+   public boolean rankMoney(int newRank) {
+      int cost = newRank*newRank + newRank -2;
       if (this.money >= cost) {
           this.money-= cost;
-          this.rank = rank;
+          this.rank = newRank;
+          return true;
       } else {
           System.out.println("Not enough money to rank up! Choose another rank, come back later, or try using credits.");
+         return false;
       }
    }
       
-   public void rankCredits(int rank){
-      int cost = (rank - 1) * 5;
-      if (this.credits >= cost) {
-          this.credits -= cost;
-          this.rank = rank;
-      } else {
-          System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
-      }
+   public boolean rankCredits(int newRank){
+     int cost = (rank - 1) * 5;
+     if (this.credits >= cost) {
+         this.credits -= cost;
+         this.rank = newRank;
+         return true;
+     } else {
+         System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
+         return false;
+     }
    }
    
-   //hello this is a mess. I am sorry.
-   public void move() {
-      if (this.room.getShots() == 0) {
-         System.out.println("Scene is complete. You may now move to a connected room.");
-         //print out room options
-         Scanner roomChoice = new Scanner(System.in);
-         Room choice = roomChoice.next();
-         return choice;
+   public boolean move(Room newRoom) {
+      if (this.room.getRooms.get(newRoom) != null) {
+         this.room = newRoom;
+         return true;
       } else {
-         System.out.println("Please complete the scene before moving.");
-         return null;
+         System.out.println("Not a valid room");
+         return false;
       }
    }
   
