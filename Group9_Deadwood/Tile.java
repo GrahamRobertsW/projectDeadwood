@@ -161,6 +161,15 @@ public class Tile{
 		list.toArray(newArray);
 		return newArray;
 	}
+
+	public void setDoors(){
+      Room[] doors = null;
+		for (Room R : rooms){
+			doors=getRooms(R);
+			R.setDoors(doors);
+		}
+	   return;
+	}
 }
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
