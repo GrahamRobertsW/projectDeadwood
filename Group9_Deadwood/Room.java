@@ -11,11 +11,13 @@ public class Room{
 	private Room[] doors;
 	private Random generator;
 	private ArrayList<Players>;
+	private boolean complete;
 //	private Scene[] Scenes;
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
 		this.maxShots=S;
 		this.shots=this.maxShots;
+		this.complete=false
 		for (Role R : Roles){
 			extraRoles.put(R.getName(),R);
 		}
@@ -30,6 +32,7 @@ public class Room{
 		this.extraRoles=null;
 		this.Scene = null;
 		this.rooms=null;
+		this.complete=false;
 		this.generator = new Random()
 	}
 
@@ -55,43 +58,34 @@ public class Room{
 		return this.Scene.getBudget();
 	}
 
-   public void success(){
-		if this.Scene.
-	}
-
-<<<<<<< HEAD
-
-
-	
-
-=======
    public void getMoves(){
 		return this.doors;
 	}
 
   public void success(){
-     if (this.scene.getPlayers.size()>0){
+	  ArrayList<Players> scenePlayers = this.scene.getPlayers();
+     if (scenePlayers.size()>0){
         int[] randomized = new int[];
-           for (int i=0; i<5; i++){
-              randomized[i]=generator.nextInt(5)+1;
-           }
-           sort(randomized);
-           for (Players P: players){
-              if P.role!=null{
-                 temp.sortInsert(player);
-              }
-           }
-           for (int i=0; i<5; i++){
-              temp[i%temp.size()].setDollars(randomized[i]);
-           }
+        for (int i=0; i<5; i++){
+           randomized[i]=generator.nextInt(5)+1;
         }
-        board.success();
-        for (Players P: players){
-           P.setRole(null);
-           P.setScene(null);
+        sort(randomized);
+        roleSort(scenePlayers);
+        for (int i=0; i<5; i++){
+           scenePlayers[i%scenePlayers.size()].setDollars(randomized[i]);
         }
-        this.scene=null;
-    }
+     }
+	  for (<player> P: extraPlayers){
+		  P.setDollars(p.role.getRank());
+	  }
+     board.success();
+     for (Players P: players){
+        P.setRole(null);
+        P.setScene(null);
+     }
+     this.scene=null;
+	  this.complete=true;
+  }  
  
         
  
@@ -106,7 +100,6 @@ public class Room{
 	public HashMap<String, Room>{
 		return this.rooms;
 	}
->>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
 /*
 
 	public void displayScene(){
