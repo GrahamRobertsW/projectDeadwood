@@ -3,7 +3,7 @@ import java.util.Random.*;
 
 public class Role{
 	private int rank;
-	private int taken;
+	private boolean taken;
 	private int star;
 	private String name;
 	private String quip;
@@ -14,7 +14,7 @@ public class Role{
 		this.quip=Q;
 		this.rank=R;
 		this.star=S;
-		this.taken=0;
+		this.taken=false;
 		this.player=null;
 	}
 
@@ -30,14 +30,18 @@ public class Role{
 		return this.rank;
 	}
 
-	public int isTaken(){
+	public boolean isTaken(){
 		return this.taken;
 	}
 
 	public void setPlayer(Players P){
-		this.taken=1;
+		this.taken=true;
 		this.player=P;
 		return;
+	}
+
+	public Players getPlayer(){
+		return this.player;
 	}
 
 	public int isStarring(){

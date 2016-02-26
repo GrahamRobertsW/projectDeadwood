@@ -6,10 +6,10 @@ public class Board{
 	private int sceneCount;
    Board(){
 		sceneCount=0;
-		tiles.put("Train Station",new TrainTile(0));
-		tiles.put("Main Street",new MainStTile(1));
-		tiles.put("Hotel",new HotelTile(2));
-		tiles.put("Secret Hideout",new SecretTile(3));
+		tiles.put("Train Station",new TrainTile(0,this));
+		tiles.put("Main Street",new MainStTile(1,this));
+		tiles.put("Hotel",new HotelTile(2,this));
+		tiles.put("Secret Hideout",new SecretTile(3,this));
 		keys = new String[] {"Train Station", "Main Street", "Hotel", "Secret Hideout"};
 		for (String i: keys){
 			tiles.get(i).setDoors();

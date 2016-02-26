@@ -2,7 +2,6 @@ package Group9_Deadwood;
 import java.util.*;
 
 public class Tile{
-	private HashMap<String, Room> Rooms;
 	//The four quarters of the board are named as follows clockwise and 0-indexed
 	// 0|1
 	// 2|3
@@ -165,13 +164,16 @@ public class Tile{
 
 	public void setDoors(){
       Room[] doors = null;
+		Room temp;
 		for (Room R : outDoors){
-			insertIntoDoors(R, Rooms, null);
+			if (Rooms.containsKey(R.getName())){
+				Rooms.put(R.getName(),R);
+			}
 		}
-		for (Room R : Rooms){
-			doors=getRooms(R);
-			R.setDoors(doors);
-
+		for (String R : Rooms.keySet()){
+			temp = Rooms.get(R);
+			doors=getRooms(temp);
+			temp.setDoors(doors);
 		}
 	   return;
 	}

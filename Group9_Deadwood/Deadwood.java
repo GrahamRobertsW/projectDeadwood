@@ -1,6 +1,6 @@
 package Group9_Deadwood;
 import java.util.Scanner;
-import java.util.random;
+import java.util.*;
 import java.util.HashMap;
 
 public class Deadwood {
@@ -11,19 +11,19 @@ public class Deadwood {
 	private Players[] TURN_ORDER;
 	private Players CURRENT_PLAYER;
 	private int SCENE_COUNT;
-	private String[] PLAYER_NAMES = new string[] {"blue","red","yellow","orange","green","violet","pink","cyan"};
+	private String[] PLAYER_NAMES = new String[] {"blue","red","yellow","orange","green","violet","pink","cyan"};
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		newGame();
 	}
 	
 	private void newGame(){
 		Scanner user_input = new Scanner(System.in);
 		System.out.print("Start a new game? (y/n)");
-		char new_game = user_input.next();
-		if(new_game == 'y'){
+		String new_game = user_input.next();
+		if(new_game == "y"){
 			// initialize variables here.
-			NUMBER_OF_PLAYERS = null;
+			NUMBER_OF_PLAYERS = 0;
 			CURRENT_DAY = 0;
 			TURN_ORDER = null;
 			CURRENT_PLAYER = null;
@@ -37,11 +37,12 @@ public class Deadwood {
 	private void createTurnOrder(int ordernum){
 		int i = (int)(Math.random() * NUMBER_OF_PLAYERS);
 		if(TURN_ORDER[ordernum] == null){
- 	               TURN_ORDER[ordernum] = new Players(0, 0, 0, 0, PLAYER_NAMES[i],board.findTrailers() , null);
+ 	               TURN_ORDER[ordernum] = new Players(0, 0, 0, 0 , null);
 		} else {
 			createTurnOrder(ordernum);
-		}
-	}
+		
+	   }
+   }
 	
 	private void startGame(){
 		//Initialize the board pseudo-randomly
@@ -56,11 +57,16 @@ public class Deadwood {
 		
 		//Set player count and initialize
 		System.out.println("How many players?");
-		NUMBER_OF_PLAYERS = user_input.next();
+		Scanner player_num = new Scanner (System.in);
+		NUMBER_OF_PLAYERS = player_num.nextInt();
 		
 		//Initialize the players. Still needs randomization.
 		for(int i=0; i < NUMBER_OF_PLAYERS; i++){
 			createTurnOrder(i);
+		}
+		Room Trailers=board.findTrailers();
+		for (Players P: TURN_ORDER){
+			P.setRoom(Trailers);
 		}
 		
 		//Begin the game
@@ -72,17 +78,17 @@ public class Deadwood {
 				boolean Has_Moved = false;
 				boolean Has_Worked = false;
 				while(!Valid_Entry){
-					System.out.printline("Enter a command.");
-					Scanner.user_input = new Scanner (System.in);
-					string input = user_input.next();
+					System.out.println("Enter a command.");
+					Scanner user_input = new Scanner (System.in);
+					String input = user_input.next();
 					//Current player turn options.
-					switch (user_input) {
+					switch (input) {
 						case "move":
-							string room_input = user_input.next();
+							String room_input = user_input.next();
 							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 							//Check for valid entry.
 							if(RoomInput == null){
-								System.out.printline("Invalid room name.");
+								System.out.println("Invalid room name.");
 								break;
 							}
 //							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
@@ -91,7 +97,7 @@ public class Deadwood {
 //							}
 							//Check if already on a role.
 							
-							if (CURRENT_PLAYER.getRole() != NULL) {
+							if (CURRENT_PLAYER.getRole() != null) {
 								System.out.println("You are on a role and can't move at this time.");
 								break;
 							}
@@ -117,15 +123,15 @@ public class Deadwood {
 							//Create a new scene, or report the current scene.
 							if(CURRENT_PLAYER.getRoom().getScene() == null) {
 								setNewScene();
-								System.out.println("New Scene: " + CURRENT_PLAYER.getRoom().displayScene());
+								System.out.println("New Scene: " + CURRENT_PLAYER.getRoom().getScene().getName() + " : " + CURRENT_PLAYER.getRoom().getScene().getDesc());
 								break;
 							} else {
-								System.out.println("The current scene is: " + CURRENT_PLAYER.getRoom().displayScene());
+								System.out.println("The current scene is: " + CURRENT_PLAYER.getRoom().getScene().getName() + " : " + CURRENT_PLAYER.getRoom().getScene().getDesc());
 								break;
 							}
 							
 						case "work":
-							string role_input = user_input.next();
+							String role_input = user_input.next();
 							//Check if already working on a role.
 							if (CURRENT_PLAYER.getRole() != null) {
 								System.out.println("You are already working a role.");
@@ -143,7 +149,7 @@ public class Deadwood {
 						case "upgrade":
 							//Check if in the casting office.
 							if(CURRENT_PLAYER.getRoom().equals("Casting Office")){
-								string currency_input = user_input.next();
+								String currency_input = user_input.next();
 								//Check second input and upgade if eligible.
 								switch (currency_input){
 									case "$":
@@ -218,14 +224,14 @@ public class Deadwood {
 	}
 	
 	private void endGame(){
-		private HashMap <Player, int> score;
+		HashMap <Players, int> score;
 		for(int i; i < NUMBER_OF_PLAYERS; i++){
-			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]);
+			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]));
 		}
 		String winner = score.get(TURN_ORDER[0]);
 		for(int i = 1; i < score.length; i++){
 			if(score.get(TURN_ORDER[i]) > max){
-				winner = score.get(TURN_ORDER[i].getName())
+				winner = score.get(TURN_ORDER[i].getName());
 			}
 		}
 		System.out.print(winner + " is the winner!");
@@ -240,7 +246,7 @@ public class Deadwood {
 		CURRENT_PLAYER = TURN_ORDER[turn];
 	}
 	
-	public Player getTurn(){
+	public Players getTurn(){
 		return CURRENT_PLAYER.getPlayer();
 	}
 	

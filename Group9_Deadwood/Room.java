@@ -1,6 +1,7 @@
 package Group9_Deadwood;
 //import Group9_Deadwood.Role;
 import java.util.*;
+import java.util.Arrays;
 public class Room{
 // class Room
 // This class represents the various rooms on the board
@@ -23,9 +24,10 @@ public class Room{
 	private Random generator;
 	private ArrayList<Players> players;
 	private boolean complete;
+	private Board board;
 
-//	private Scene[] Scenes;
-	Room(String N, Role[] Roles, int S){
+	private Scene[] Scenes;
+	Room(String N, Role[] Roles, int S, Board B){
 // Constructor
 // passes hardcoded values for a rooms and its scene from the hardcoded Tile class extensions
 // passes a name N,
@@ -40,9 +42,10 @@ public class Room{
 		}
 		this.rooms=null;
 		this.generator = new Random();
+		this.board=B;
 	}
 
-	Room(String N){
+	Room(String N, Board B){
 		this.name=N;
 		this.shots=0;
 		this.maxShots=0;
@@ -52,7 +55,6 @@ public class Room{
 		this.complete=false;
 		this.generator = new Random();
 	}
-
 	public String getName(){
 		return name;
 	}
@@ -98,25 +100,26 @@ public class Room{
          for (int i=0; i<5; i++){
             randomized[i]=generator.nextInt(5)+1;
         }
-        Collections.sort(randomized);
+        Arrays.sort(randomized);
         roleSort(scenePlayers);
         for (int i=0; i<5; i++){
-           scenePlayers.get(i%scenePlayers.size()).setDollars(randomized[i]);
+           scenePlayers.get(i%scenePlayers.size()).setMoney(randomized[i]);
         }
      }
-	  ArrayList extraPlayers = new ArrayList<Players>();
-	  for (Role role : extraRoles){
+	  ArrayList<Players> extraPlayers = new ArrayList<Players>();
+	  for (String key : extraRoles.keySet()){
+		  Role role = extraRoles.get(key);
 		  if (role.getPlayer()!=null){
 			  extraPlayers.add(role.getPlayer());
 	  for (Players P: extraPlayers){
-		  P.setDollars(P.role.getRank());
+		  P.setMoney(P.getRole().getRank());
 	  }
      board.success();
      for (Players P: players){
-        P.setRole(null);
-        P.setScene(null);
+        P.nullRole();
+        P.nullScene();
      }
-     this.scene=null;
+     this.Scene=null;
 	  this.complete=true;
      }  
    }
@@ -133,28 +136,37 @@ public class Room{
 	public HashMap<String, Room> getMoves(){
 		return this.rooms;
 	}
-/*
+
 
 	public void displayScene(){
-		System.out.print("%s : %s.", this.Scene.getName() this.Scene.getDesc());
+		System.out.printf("%s : %s.", this.Scene.getName(), this.Scene.getDesc());
 	}
 
 	public void setScene(Scene set){
 		this.Scene = set;
 		this.Scene.used(true);
 	}
+   
+	public Scene getScene(){
+		return this.Scene;
+	}
 
 	public boolean checkSuccess(){
 		return this.Scene.getSuccess();
 	}
 	
-	public Room getRoomKey(string input){
-		for(Room key : rooms.keyset()){
+	/*public Room getRoomKey(String input){
+		for(String key : rooms.keySet()){
 			if(rooms.get(key).equals(input)){
-				return key;
+				return rooms.get(key);
 			}
 		}
 		return null;
 	}	
-*/
+	*/
+
+	public Room getRoomKey(String input){
+		return rooms.get(input);
+	}
+
 }

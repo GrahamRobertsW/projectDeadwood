@@ -11,14 +11,15 @@ public class Players {
    private String name;
    private Room room;
    private Role role;
-   
-   Players(int credits, int rank, double money, int rehearsalVal, String name, Room room, Role role) {
+   private Scene scene;
+   Players(int credits, int rank, double money, int rehearsalVal, String name) {
       this.credits = credits;
       this.money = money;
       this.rehearsalVal = rehearsalVal;
-      this.name = name;
+      this.name = null;;
       this.room = room;
-      this.role = role;
+      this.role = null;
+		this.scene=null;
    }
    
    public Players getPlayer(){
@@ -89,11 +90,24 @@ public class Players {
       return this.role;
   }
   
-  public void setRole() {
-      setPlayer();
+  public void setRole(Role R) {
+      this.role=R;
+		return;
   }
   
-  
+  public void nullRole(){
+	  this.role=null;
+	  return;
+  }
+  public void setScene(Scene S){
+	  this.scene=S;
+	  return;
+  }
+
+  public void nullScene(){
+	  this.scene=null;
+	  return;
+  }
   public boolean act() {
    if (this.role != null) {
       int budget = this.room.getBudget();
@@ -152,7 +166,7 @@ public class Players {
    }
    
    public boolean move(Room newRoom) {
-      if (this.room.getRooms.get(newRoom) != null) {
+      if (this.room.getMoves().get(newRoom) != null) {
          this.room = newRoom;
          return true;
       } else {
