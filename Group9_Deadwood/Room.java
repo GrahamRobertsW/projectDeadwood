@@ -2,7 +2,6 @@ package Group9_Deadwood;
 //import Group9_Deadwood.Role;
 import java.util.HashMap;
 public class Room{
-//	private sceneObject scene;
    private int shots;
 	private int maxShots;
 	private HashMap<String, Role> extraRoles;
@@ -54,32 +53,35 @@ public class Room{
 	}
 
    public void success(){
-		return;
-	}
-/*
-	public void createScenes(){
-		
-		try(Scanner input = new Scanner(new File(scenes.txt))){
-			while(input.hasNextLine()){
-				string[] lines = input.nextLine().split("|");
-			}
-		} catch (FileNotFoundException ex) { System.err.println("Error: File not found.");}
-
-		for(i=0;i < 39; i++){
-			Scenes[i] = new Scene();
-		}
+		if this.Scene.
 	}
 
-	public boolean getSceneUsed(){
-		return this.Scene.used();
-	}
+
+
 	
-	public void setSceneUsed(boolean value){
-		this.Scene.used(value);
-	}
 
-	public void getScene(){
+/*
+
+	public void displayScene(){
 		System.out.print("%s : %s.", this.Scene.getName() this.Scene.getDesc());
 	}
+
+	public void setScene(Scene set){
+		this.Scene = set;
+		this.Scene.used(true);
+	}
+
+	public boolean checkSuccess(){
+		return this.Scene.getSuccess();
+	}
+	
+	public Room getRoomKey(string input){
+		for(Room key : rooms.keyset()){
+			if(rooms.get(key).equals(input)){
+				return key;
+			}
+		}
+		return null;
+	}	
 */
 }

@@ -7,11 +7,15 @@ public class Scene{
 	private int budget;
 	private HashMap<String, Role> Roles;
 	private int index;
-//	private boolean use;      
+//	private boolean use;
+//	private boolean success;
+      	private List<Players> players = new List<Players>
 	Scene(String input){
 		int rank;
 		String[] temp;
 		Role tempRole;
+//		use = false;
+//		success = false;
 		String[] values= input.split("~");
 		name = values[1];
       desc= values[2];
@@ -39,6 +43,11 @@ public class Scene{
 	public int getBudget(){
 		return this.budget;
 	}
+	
+	public void addPlayer(Player player){
+		
+		players.add(player);
+	}
 /*
 	public boolean used(){
 		return this.use;
@@ -47,6 +56,22 @@ public class Scene{
 	public void used(boolean value){
 		this.use = value;
 	}
+	
+	public boolean getSuccess(){
+		return this.success;
+	}
+	
+	public void setSuccess(boolean val){
+		this.success = val;
+	}
+
+	public string getName(){
+		reutn this.name;
+	}
+
+	public string getDesc(){
+		return this.desc;
+	}
 */
 	
-}	
+}
