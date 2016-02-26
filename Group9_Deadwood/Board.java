@@ -17,4 +17,7 @@ public class Board{
 	   String key = keys[i];
 		return tiles.get(key);
 	}
+	public Room findTrailers(){
+		return this.tiles.get("Main Street").findTrailers();
+	}
 }

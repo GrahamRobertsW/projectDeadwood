@@ -77,6 +77,12 @@ public class Room{
  *    int[] randomized = new int[];
  *       for (int i=0; i<5; i++){
  *          randomized[i]=generator.nextInt(5)+1;
+ *       }
+ *       sort(randomized);
+ *       ArrayList <Player>
+ *
+ */
+
 	public void setDoors(Room[] Rs){
 		for (Room R: Rs){
 			rooms.put(R.getName(), R);

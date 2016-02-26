@@ -171,6 +171,10 @@ public class Tile{
 		}
 	   return;
 	}
+	
+	public Room findTrailers(){
+      return this.Rooms(:Trailers");
+	}
 }
 	//Tile(int position, HashMap<String,  R){
 	//	this.poition=pos;
