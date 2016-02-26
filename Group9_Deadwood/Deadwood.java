@@ -3,10 +3,10 @@ import java.util.Scanner;
 import java.util.random;
 import java.util.HashMap;
 
-
 public class Deadwood {
 
 	private int NUMBER_OF_PLAYERS;
+	private Scene[] SCENES;
 	private int CURRENT_DAY;
 	private Players[] TURN_ORDER;
 	private Players CURRENT_PLAYER;
@@ -43,6 +43,7 @@ public class Deadwood {
 		TrainTile = new TrainTile((tileorder+3) % 3);*/
 		
 		Board = new Board();
+		createScenes();
 		
 		//Set player count and initialize
 		System.out.println("How many players?");
@@ -65,16 +66,16 @@ public class Deadwood {
 					System.out.printline("Enter a command.");
 					Scanner.user_input = new Scanner (System.in);
 					string input = user_input.next();
-					//current turn options
+					//Current player turn options.
 					switch (user_input) {
 						case "move":
 							string room_input = user_input.next();
-							//check if valid entry
+							//Check for valid entry.
 							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
 								System.out.printline("Invalid room name.");
 								break;
 							}
-							//check if on a role
+							//Check if already on a role.
 							if (CURRENT_PLAYER.getRole() != NULL) {
 								System.out.println("You are on a role and can't move at this time.");
 								break;
@@ -83,24 +84,37 @@ public class Deadwood {
 								System.out.println("You have already moved this turn.");
 								break;
 							}
-							//check valid direction.
+							//Check valid direction.
 							
-							//move
+							//Move.
 							CURRENT_PLAYER.setRoom(room_input);
 							Has_Moved = true;
-							//read card
-							if(!CURRENT_PLAYER.getRoom.getSceneUsed()){
-								CURRENT_PLAYER.getRoom.getSceneUsed(true);
-								SCENE_COUNT++;
+							//Read card.
+							//Check if moving to a room where the scene has already finished.
+							if(CURRENT_PLAYER.getRoom().checkSuccess() == true){
+								System.out.println("This scene has already been completed.");
+								break;
 							}
-							System.out.println("The current scene is " + CURRENT_PLAYER.getRoom.getScene());
-							break;
+							//Create a new scene, or report the current scene.
+							if(CURRENT_PLAYER.getRoom().getScene() == null) {
+								setNewScene();
+								System.out.println("New Scene: " + CURRENT_PLAYER.getRoom().displayScene());
+								break;
+							} else {
+								System.out.println("The current scene is: " + CURRENT_PLAYER.getRoom().displayScene());
+								break;
+							}
 							
 						case "work":
 							string role_input = user_input.next();
-							//check if working on a role
-							if (CURRENT_PLAYER.getRole() != NULL) {
+							//Check if already working on a role.
+							if (CURRENT_PLAYER.getRole() != null) {
 								System.out.println("You are already working a role.");
+								break;
+							}
+							//Check if someone else is working on the role.
+							if(CURRENT_PLAYER.getRole().isTaken() == true) {
+								System.out.println("Someone is already on this role.");
 								break;
 							}
 							//set a role
@@ -108,18 +122,19 @@ public class Deadwood {
 							break;
 							
 						case "upgrade":
-							//check room
+							//Check if in the casting office.
 							if(CURRENT_PLAYER.getRoom().equals("Casting Office")){
 								string currency_input = user_input.next();
+								//Check second input and upgade if eligible.
 								switch (currency_input){
 									case "$":
 										int dollar_input = user_input.nextInt();
 										CURRENT_PLAYER.rankMoney(dollar_input);
-										
+										break;
 									case "cr":
 										int credit_input = user_input.nextInt();
 										CURRENT_PLAYER.rankCredits(credit_input);
-										
+										break;
 									default:
 										System.out.println("Invalid input.");
 										break;
@@ -158,6 +173,10 @@ public class Deadwood {
 							if(!CURRENT_PLAYER.act()){
 								break;
 							} else {
+								//check if scene completed
+								if(CURRENT_PLAYER.getRoom().checkSuccess() == true){
+									SCENE_COUNT++;
+								}
 								Has_Worked = true;
 								break;
 							}
@@ -174,7 +193,6 @@ public class Deadwood {
 				}
 			}
 			setDay(CURRENT_DAY++);
-			//Create new scenes from room class?
 		}
 		//Start end game process
 		endGame();	
@@ -210,4 +228,27 @@ public class Deadwood {
 	private void setDay(int day){
 		CURRENT_DAY = day;
 	}
+	
+	//Sets a new scene to a room if the current player goes into a new room
+	//where a scene is not yet set.
+	private void setNewScene(){
+		//Random number between 0 and 39
+		int i = (int)(Math.random() * 39);
+		if(!SCENES[i].used()){
+			CURRENT_PLAYER.getRoom().setScene(SCENES[i]);
+		} else {
+			setNewScene();
+		}
+	}
+	
+	//Create scene objects.
+    private void createScenes(){
+        try(Scanner input = new Scanner(new File(scenes.txt))){
+        	input.useDelimiter("|");
+            while(input.hasNext()){
+            	SCENES[input.next()] = new Scene();
+            }
+        } catch (FileNotFoundException ex) { System.err.println("Error: File not found.");}
+    }
+
 }
