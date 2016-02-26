@@ -95,8 +95,8 @@ public class Players {
       return this.role;
   }
   
-  public void setRole(Role n) {
-      this.role = n;
+  public void setRole() {
+      setPlayer();
   }
   
   
