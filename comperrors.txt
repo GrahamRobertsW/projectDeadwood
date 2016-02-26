@@ -1,0 +1,301 @@
+Group9_Deadwood/Deadwood.java:14: error: illegal start of expression
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                ^
+Group9_Deadwood/Deadwood.java:14: error: illegal start of type
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                 ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                       ^
+Group9_Deadwood/Deadwood.java:14: error: ';' expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                        ^
+Group9_Deadwood/Deadwood.java:14: error: illegal start of type
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                             ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                              ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                       ^
+Group9_Deadwood/Deadwood.java:14: error: illegal start of type
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                               ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                        ^
+Group9_Deadwood/Deadwood.java:14: error: illegal start of type
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                                ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                                 ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                                        ^
+Group9_Deadwood/Deadwood.java:14: error: illegal start of type
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                                              ^
+Group9_Deadwood/Deadwood.java:14: error: <identifier> expected
+	private String[] PLAYER_NAMES = ["blue","red","yellow","orange","green","violet","pink","cyan"]
+	                                                                                               ^
+Group9_Deadwood/Deadwood.java:16: error: ';' expected
+	public static void main(String[] args) {
+	      ^
+Group9_Deadwood/Deadwood.java:73: error: illegal start of expression
+<<<<<<< HEAD
+^
+Group9_Deadwood/Deadwood.java:73: error: illegal start of expression
+<<<<<<< HEAD
+  ^
+Group9_Deadwood/Deadwood.java:73: error: illegal start of expression
+<<<<<<< HEAD
+    ^
+Group9_Deadwood/Deadwood.java:74: error: > expected
+							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							^
+Group9_Deadwood/Deadwood.java:74: error: ';' expected
+							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							    ^
+Group9_Deadwood/Deadwood.java:74: error: illegal start of expression
+							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							               ^
+Group9_Deadwood/Deadwood.java:74: error: ';' expected
+							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							                               ^
+Group9_Deadwood/Deadwood.java:86: error: illegal start of expression
+=======
+^
+Group9_Deadwood/Deadwood.java:86: error: illegal start of expression
+=======
+  ^
+Group9_Deadwood/Deadwood.java:86: error: illegal start of expression
+=======
+    ^
+Group9_Deadwood/Deadwood.java:86: error: illegal start of expression
+=======
+      ^
+Group9_Deadwood/Deadwood.java:88: error: illegal start of expression
+							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
+							^
+Group9_Deadwood/Deadwood.java:88: error: not a statement
+							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
+							  ^
+Group9_Deadwood/Deadwood.java:88: error: ';' expected
+							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
+							                                                                                                                                                                                              ^
+Group9_Deadwood/Deadwood.java:93: error: illegal start of expression
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+^
+Group9_Deadwood/Deadwood.java:93: error: illegal start of expression
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+   ^
+Group9_Deadwood/Deadwood.java:93: error: illegal start of expression
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+      ^
+Group9_Deadwood/Deadwood.java:93: error: ';' expected
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+                                                ^
+Group9_Deadwood/Deadwood.java:102: error: illegal start of expression
+<<<<<<< HEAD
+^
+Group9_Deadwood/Deadwood.java:102: error: illegal start of expression
+<<<<<<< HEAD
+  ^
+Group9_Deadwood/Deadwood.java:102: error: illegal start of expression
+<<<<<<< HEAD
+    ^
+Group9_Deadwood/Deadwood.java:105: error: > expected
+							if(!CURRENT_PLAYER.move(RoomInput)){
+							^
+Group9_Deadwood/Deadwood.java:105: error: ';' expected
+							if(!CURRENT_PLAYER.move(RoomInput)){
+							  ^
+Group9_Deadwood/Deadwood.java:105: error: not a statement
+							if(!CURRENT_PLAYER.move(RoomInput)){
+							   ^
+Group9_Deadwood/Deadwood.java:105: error: ';' expected
+							if(!CURRENT_PLAYER.move(RoomInput)){
+							                                  ^
+Group9_Deadwood/Deadwood.java:111: error: illegal start of expression
+=======
+^
+Group9_Deadwood/Deadwood.java:111: error: illegal start of expression
+=======
+  ^
+Group9_Deadwood/Deadwood.java:111: error: illegal start of expression
+=======
+    ^
+Group9_Deadwood/Deadwood.java:111: error: illegal start of expression
+=======
+      ^
+Group9_Deadwood/Deadwood.java:115: error: ';' expected
+							Room roomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							    ^
+Group9_Deadwood/Deadwood.java:117: error: illegal start of expression
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+^
+Group9_Deadwood/Deadwood.java:117: error: illegal start of expression
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+   ^
+Group9_Deadwood/Deadwood.java:117: error: illegal start of expression
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+      ^
+Group9_Deadwood/Deadwood.java:117: error: ';' expected
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+                                                ^
+Group9_Deadwood/Deadwood.java:229: error: illegal start of expression
+		private HashMap <Player, int> score;
+		^
+Group9_Deadwood/Deadwood.java:231: error: ')' expected
+			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]);
+			                                                      ^
+Group9_Deadwood/Deadwood.java:236: error: ';' expected
+				winner = score.get(TURN_ORDER[i].getName())
+				                                           ^
+Group9_Deadwood/Room.java:13: error: <identifier> expected
+	private ArrayList<Players>;
+	                          ^
+Group9_Deadwood/Room.java:20: error: ';' expected
+		this.complete=false
+		                   ^
+Group9_Deadwood/Room.java:25: error: ';' expected
+		this.generator = new Random()
+		                             ^
+Group9_Deadwood/Room.java:36: error: ';' expected
+		this.generator = new Random()
+		                             ^
+Group9_Deadwood/Room.java:68: error: array dimension missing
+        int[] randomized = new int[];
+                                    ^
+Group9_Deadwood/Room.java:78: error: illegal start of expression
+	  for (<player> P: extraPlayers){
+	                ^
+Group9_Deadwood/Room.java:78: error: illegal start of expression
+	  for (<player> P: extraPlayers){
+	                 ^
+Group9_Deadwood/Room.java:78: error: ';' expected
+	  for (<player> P: extraPlayers){
+	                  ^
+Group9_Deadwood/Room.java:100: error: ';' expected
+	public HashMap<String, Room> getMoves{
+	                                     ^
+Group9_Deadwood/Scene.java:10: error: illegal start of type
+<<<<<<< HEAD
+^
+Group9_Deadwood/Scene.java:10: error: ';' expected
+<<<<<<< HEAD
+  ^
+Group9_Deadwood/Scene.java:10: error: illegal start of type
+<<<<<<< HEAD
+    ^
+Group9_Deadwood/Scene.java:10: error: <identifier> expected
+<<<<<<< HEAD
+      ^
+Group9_Deadwood/Scene.java:10: error: ';' expected
+<<<<<<< HEAD
+       ^
+Group9_Deadwood/Scene.java:14: error: '(' or '[' expected
+=======
+^
+Group9_Deadwood/Scene.java:14: error: illegal start of expression
+=======
+  ^
+Group9_Deadwood/Scene.java:14: error: illegal start of expression
+=======
+    ^
+Group9_Deadwood/Scene.java:14: error: illegal start of expression
+=======
+      ^
+Group9_Deadwood/Scene.java:15: error: illegal start of expression
+	private List<Players> players;
+	^
+Group9_Deadwood/Scene.java:17: error: illegal start of type
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+^
+Group9_Deadwood/Scene.java:17: error: ';' expected
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+   ^
+Group9_Deadwood/Scene.java:17: error: illegal start of type
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+      ^
+Group9_Deadwood/Scene.java:17: error: ';' expected
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+                                                ^
+Group9_Deadwood/Scene.java:27: error: '(' or '[' expected
+		this.players = new List<Players>;
+		                                ^
+Group9_Deadwood/Scene.java:56: error: illegal start of type
+<<<<<<< HEAD
+^
+Group9_Deadwood/Scene.java:56: error: ';' expected
+<<<<<<< HEAD
+  ^
+Group9_Deadwood/Scene.java:56: error: illegal start of type
+<<<<<<< HEAD
+    ^
+Group9_Deadwood/Scene.java:56: error: <identifier> expected
+<<<<<<< HEAD
+      ^
+Group9_Deadwood/Scene.java:56: error: ';' expected
+<<<<<<< HEAD
+       ^
+Group9_Deadwood/Scene.java:57: error: illegal start of type
+=======
+^
+Group9_Deadwood/Scene.java:57: error: <identifier> expected
+=======
+  ^
+Group9_Deadwood/Scene.java:57: error: ';' expected
+=======
+    ^
+Group9_Deadwood/Scene.java:57: error: illegal start of type
+=======
+      ^
+Group9_Deadwood/Scene.java:57: error: <identifier> expected
+=======
+       ^
+Group9_Deadwood/Scene.java:58: error: ';' expected
+	public List<Players> getPlayers(){
+	      ^
+Group9_Deadwood/Scene.java:58: error: invalid method declaration; return type required
+	public List<Players> getPlayers(){
+	                     ^
+Group9_Deadwood/Scene.java:59: error: ';' expected
+		return this.players()
+		                     ^
+Group9_Deadwood/Scene.java:61: error: illegal start of type
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+^
+Group9_Deadwood/Scene.java:61: error: ';' expected
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+   ^
+Group9_Deadwood/Scene.java:61: error: illegal start of type
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+      ^
+Group9_Deadwood/Scene.java:61: error: ';' expected
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
+                                                ^
+Group9_Deadwood/Scene.java:90: error: class, interface, or enum expected
+=======
+^
+Group9_Deadwood/Tile.java:176: error: illegal start of expression
+      return this.Rooms(:Trailers");
+                        ^
+Group9_Deadwood/Tile.java:176: error: ';' expected
+      return this.Rooms(:Trailers");
+                         ^
+Group9_Deadwood/Tile.java:176: error: unclosed string literal
+      return this.Rooms(:Trailers");
+                                 ^
+Group9_Deadwood/Tile.java:176: error: ';' expected
+      return this.Rooms(:Trailers");
+                                    ^
+Group9_Deadwood/Tile.java:178: error: reached end of file while parsing
+}
+ ^
+100 errors
