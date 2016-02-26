@@ -151,26 +151,12 @@ public class Players {
      }
    }
    
-   /* Move provides the user with a list of rooms they can go to if they are on a completed scene.
-      User inputs a room, and move checks it's a valid move. If valid, the player's room is changed. 
-      If not, user is informed of their error and Deadwood handles it from there.   
-   */
-   public boolean move() {
-      if (this.room.getShots() == 0) {
-         System.out.println("Scene complete. Choose a new room to move to");
-         System.out.println(this.room.getMoves());
-         Scanner user_choice = new Scanner();
-         Room newRoom = user_choice.next();
-         if (newRoom.isValid()) {
-            this.room = newRoom;
-            System.out.println("You are now in the room " + this.room);
-            return true;
-         } else {
-            System.out.println("Not a valid room choice.");
-            return false;
-         }
+   public boolean move(Room newRoom) {
+      if (this.room.getRooms.get(newRoom) != null) {
+         this.room = newRoom;
+         return true;
       } else {
-         System.out.println("Scene not yet complete. Act or rehearse until scene is complete then move.");
+         System.out.println("Not a valid room");
          return false;
       }
    }
