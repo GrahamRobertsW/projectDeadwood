@@ -34,6 +34,15 @@ public class Deadwood {
 		}
 	}
 	
+	private void createTurnOrder(int ordernum){
+		int i = (int)(Math.random() * NUMBER_OF_PLAYERS);
+		if(TURN_ORDER[ordernum] == null){
+ 	               TURN_ORDER[ordernum] = new Players(0, 0, 0, 0, PLAYER_NAMES[i],board.findTrailers() , null);
+		} else {
+			createTurnOrder(ordernum);
+		}
+	}
+	
 	private void startGame(){
 		//Initialize the board pseudo-randomly
 		/*int tile_order = (int)(Math.random() * 4);
@@ -42,7 +51,7 @@ public class Deadwood {
 		SecretTile = new SecretTile((tileorder+2) % 3);
 		TrainTile = new TrainTile((tileorder+3) % 3);*/
 		
-		Board = new Board();
+		Board board = new Board();
 		createScenes();
 		
 		//Set player count and initialize
@@ -50,8 +59,8 @@ public class Deadwood {
 		NUMBER_OF_PLAYERS = user_input.next();
 		
 		//Initialize the players. Still needs randomization.
-		for(int i; i < NUMBER_OF_PLAYERS; i++){
-			TURN_ORDER[i] = new Players(0, 0, 0, 0, PLAYER_NAMES[i], null, null);
+		for(int i=0; i < NUMBER_OF_PLAYERS; i++){
+			createTurnOrder(i);
 		}
 		
 		//Begin the game
@@ -70,7 +79,6 @@ public class Deadwood {
 					switch (user_input) {
 						case "move":
 							string room_input = user_input.next();
-<<<<<<< HEAD
 							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 							//Check for valid entry.
 							if(RoomInput == null){
@@ -83,14 +91,6 @@ public class Deadwood {
 //							}
 							//Check if already on a role.
 							
-=======
-							//Check for valid entry.
-							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
-								System.out.printline("Invalid room name.");
-								break;
-							}
-							//Check if already on a role.
->>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
 							if (CURRENT_PLAYER.getRole() != NULL) {
 								System.out.println("You are on a role and can't move at this time.");
 								break;
@@ -99,7 +99,6 @@ public class Deadwood {
 								System.out.println("You have already moved this turn.");
 								break;
 							}
-<<<<<<< HEAD
 
 							//Check valid direction.
 							if(!CURRENT_PLAYER.move(RoomInput)){
@@ -108,13 +107,6 @@ public class Deadwood {
 							//Move.
 							
 							CURRENT_PLAYER.setRoom(RoomInput);
-=======
-							//Check valid direction.
-							
-							//Move.
-							Room roomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
-							CURRENT_PLAYER.setRoom(roomInput);
->>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
 							Has_Moved = true;
 							//Read card.
 							//Check if moving to a room where the scene has already finished.
