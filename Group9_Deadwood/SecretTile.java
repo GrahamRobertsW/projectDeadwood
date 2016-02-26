@@ -2,7 +2,6 @@ package Group9_Deadwood;
 import java.util.HashMap;
 public class SecretTile extends Tile{
 	private String[] names={"Secret Hideout", "Ranch"};
-	private HashMap<String, Room> Rooms;
 	private int[]shots={3,2};
 	private Room outDoors[]=new Room[] {Rooms.get("Casting Office"), Rooms.get("Ranch"), Rooms.get("Ranch"), Rooms.get("Secret Hideout"), Rooms.get("Secret Hideout"), Rooms.get("Secret Hideout"), Rooms.get("Secret Hideout"), Rooms.get("Casting Office")};
 

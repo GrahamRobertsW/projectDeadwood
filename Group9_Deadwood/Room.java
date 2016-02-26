@@ -21,7 +21,7 @@ public class Room{
 	private HashMap<String, Room> rooms;
 	private Room[] doors;
 	private Random generator;
-	private ArrayList<Players>;
+	private ArrayList<Players> players;
 	private boolean complete;
 
 //	private Scene[] Scenes;
@@ -34,12 +34,12 @@ public class Room{
 		this.name=N;
 		this.maxShots=S;
 		this.shots=this.maxShots;
-		this.complete=false
+		this.complete=false;
 		for (Role R : Roles){
 			extraRoles.put(R.getName(),R);
 		}
 		this.rooms=null;
-		this.generator = new Random()
+		this.generator = new Random();
 	}
 
 	Room(String N){
@@ -50,7 +50,7 @@ public class Room{
 		this.Scene = null;
 		this.rooms=null;
 		this.complete=false;
-		this.generator = new Random()
+		this.generator = new Random();
 	}
 
 	public String getName(){
@@ -75,25 +75,41 @@ public class Room{
 		return this.Scene.getBudget();
 	}
 
-   public void getDoors(){
+   public Room[] getDoors(){
 		return this.doors;
 	}
 
-  public void success(){
-	  ArrayList<Players> scenePlayers = this.scene.getPlayers();
-     if (scenePlayers.size()>0){
-        int[] randomized = new int[];
-        for (int i=0; i<5; i++){
-           randomized[i]=generator.nextInt(5)+1;
+	public void roleSort(ArrayList<Players> Ps){
+		Players temp;
+		for (int i=Ps.size(); i>1; i--){
+			int j=i;
+			while (Ps.get(i).getRank() > Ps.get(i-1).getRank()){
+				temp=Ps.get(i-1);
+				Ps.set(i-1,Ps.get(i));
+				Ps.set(i,temp);
+			}
+		}
+		return;
+	}
+   public void success(){
+	   ArrayList<Players> scenePlayers = this.Scene.getPlayers();
+      if (scenePlayers.size()>0){
+         int[] randomized = new int[5];
+         for (int i=0; i<5; i++){
+            randomized[i]=generator.nextInt(5)+1;
         }
-        sort(randomized);
+        Collections.sort(randomized);
         roleSort(scenePlayers);
         for (int i=0; i<5; i++){
-           scenePlayers[i%scenePlayers.size()].setDollars(randomized[i]);
+           scenePlayers.get(i%scenePlayers.size()).setDollars(randomized[i]);
         }
      }
-	  for (<player> P: extraPlayers){
-		  P.setDollars(p.role.getRank());
+	  ArrayList extraPlayers = new ArrayList<Players>();
+	  for (Role role : extraRoles){
+		  if (role.getPlayer()!=null){
+			  extraPlayers.add(role.getPlayer());
+	  for (Players P: extraPlayers){
+		  P.setDollars(P.role.getRank());
 	  }
      board.success();
      for (Players P: players){
@@ -102,9 +118,9 @@ public class Room{
      }
      this.scene=null;
 	  this.complete=true;
-  }  
- 
-        
+     }  
+   }
+	}      
  
 
 	public void setDoors(Room[] Rs){
@@ -114,7 +130,7 @@ public class Room{
 	   return;
 	}
 
-	public HashMap<String, Room> getMoves{
+	public HashMap<String, Room> getMoves(){
 		return this.rooms;
 	}
 /*
