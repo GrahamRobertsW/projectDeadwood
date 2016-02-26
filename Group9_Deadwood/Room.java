@@ -70,6 +70,10 @@ public class Room{
 		}
 	   return;
 	}
+
+	public HashMap<String, Room>{
+		return this.rooms;
+	}
 /*
 	public void createScenes(){
 		

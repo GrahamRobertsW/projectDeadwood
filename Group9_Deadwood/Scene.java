@@ -1,5 +1,5 @@
 package Group9_Deadwood;
-import java.util.HashMap;
+import java.util.*;
 
 public class Scene{
 	private String name;
@@ -7,7 +7,7 @@ public class Scene{
 	private int budget;
 	private HashMap<String, Role> Roles;
 	private int index;
-   private List<Players> players;
+	private List<Players> players;
 //	private boolean use;      
 	Scene(String input){
 		int rank;
@@ -16,7 +16,8 @@ public class Scene{
 		String[] values= input.split("~");
 		name = values[1];
       desc= values[2];
-      this.players = new List<Player>;
+		this.players = new List<Players>;
+
 		try{
 			index=Integer.parseInt(values[0]);
 			budget=Integer.parseInt(values[3]);
@@ -44,6 +45,9 @@ public class Scene{
 	public void addPlayer(Player player){		
 		players.add(player);
 	}
+	public List<Players> getPlayers(){
+		return this.players()
+	}
 /*
 	public boolean used(){
 		return this.use;
@@ -52,5 +56,6 @@ public class Scene{
 	public void used(boolean value){
 		this.use = value;
 	}
-*/	
+<<<<<<< HEAD
+*/
 }	
