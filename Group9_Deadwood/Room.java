@@ -1,7 +1,6 @@
 package Group9_Deadwood;
 //import Group9_Deadwood.Role;
-import java.util.HashMap;
-import java.math.util.Random;
+import java.util.*;
 public class Room{
    private int shots;
 	private int maxShots;
@@ -11,6 +10,7 @@ public class Room{
 	private HashMap<String, Room> rooms;
 	private Room[] doors;
 	private Random generator;
+	private ArrayList<Players>;
 //	private Scene[] Scenes;
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
@@ -69,19 +69,32 @@ public class Room{
 		return this.doors;
 	}
 
-	public void success(){
-		return;
-	}
-/* public void success(){
- * if (this.scene.getPlayers.size()>0){
- *    int[] randomized = new int[];
- *       for (int i=0; i<5; i++){
- *          randomized[i]=generator.nextInt(5)+1;
- *       }
- *       sort(randomized);
- *       ArrayList <Player>
- *
- */
+  public void success(){
+     if (this.scene.getPlayers.size()>0){
+        int[] randomized = new int[];
+           for (int i=0; i<5; i++){
+              randomized[i]=generator.nextInt(5)+1;
+           }
+           sort(randomized);
+           for (Players P: players){
+              if P.role!=null{
+                 temp.sortInsert(player);
+              }
+           }
+           for (int i=0; i<5; i++){
+              temp[i%temp.size()].setDollars(randomized[i]);
+           }
+        }
+        board.success();
+        for (Players P: players){
+           P.setRole(null);
+           P.setScene(null);
+        }
+        this.scene=null;
+    }
+ 
+        
+ 
 
 	public void setDoors(Room[] Rs){
 		for (Room R: Rs){
