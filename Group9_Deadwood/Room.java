@@ -1,6 +1,7 @@
 package Group9_Deadwood;
 //import Group9_Deadwood.Role;
 import java.util.HashMap;
+import java.math.util.Random;
 public class Room{
 //	private sceneObject scene;
    private int shots;
@@ -10,6 +11,7 @@ public class Room{
 	private String name;
 	private HashMap<String, Room> rooms;
 	private Room[] doors;
+	private Random generator;
 //	private Scene[] Scenes;
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
@@ -19,6 +21,7 @@ public class Room{
 			extraRoles.put(R.getName(),R);
 		}
 		this.rooms=null;
+		this.generator = new Random()
 	}
 
 	Room(String N){
@@ -28,6 +31,7 @@ public class Room{
 		this.extraRoles=null;
 		this.Scene = null;
 		this.rooms=null;
+		this.generator = new Random()
 	}
 
 	public String getName(){
@@ -63,7 +67,11 @@ public class Room{
 	public void success(){
 		return;
 	}
-
+/* public void success(){
+ * if (this.scene.getPlayers.size()>0){
+ *    int[] randomized = new int[];
+ *       for (int i=0; i<5; i++){
+ *          randomized[i]=generator.nextInt(5)+1;
 	public void setDoors(Room[] Rs){
 		for (Room R: Rs){
 			rooms.put(R.getName(), R);
