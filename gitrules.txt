@@ -12,3 +12,14 @@ git checkout master
 git pull
 git merge name
 git push
+
+git checkout Chad
+git add -A
+git commit -m "jlkj"
+git checkout master
+git merge Chad
+git pull
+git push
+git checkout Chad
+git merge master
+
