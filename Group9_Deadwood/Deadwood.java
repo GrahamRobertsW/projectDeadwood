@@ -2,6 +2,9 @@ package Group9_Deadwood;
 import java.util.Scanner;
 import java.util.*;
 import java.util.HashMap;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Deadwood {
 
@@ -143,7 +146,7 @@ public class Deadwood {
 								break;
 							}
 							//Set role.
-							CURRENT_PLAYER.setRole(role_input);
+							CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input));
 							break;
 							
 						case "upgrade":
@@ -175,7 +178,7 @@ public class Deadwood {
 							break;
 							
 						case "where":
-							System.out.println(CURRENT_PLAYER.getRoom() + " " + CURRENT_PLAYER.getScene());
+							System.out.println(CURRENT_PLAYER.getRoom() + " " + CURRENT_PLAYER.getRoom().getScene());
 							break;
 							
 						case "rehearse":
@@ -207,7 +210,9 @@ public class Deadwood {
 							}
 							
 						case "end":
-							setTurn(CURRENT_PLAYER++);
+							int n=findIndexPlayer(TURN_ORDER, CURRENT_PLAYER);
+                     n++;
+							setTurn(n);
 							Valid_Entry = true;
 							break;
 							
@@ -224,17 +229,19 @@ public class Deadwood {
 	}
 	
 	private void endGame(){
-		HashMap <Players, int> score;
-		for(int i; i < NUMBER_OF_PLAYERS; i++){
+		HashMap<Players, Integer> score = new HashMap<Players, Integer>();
+		for(int i = 0; i < NUMBER_OF_PLAYERS; i++){
 			score.put(TURN_ORDER[i], calculateScore(TURN_ORDER[i]));
 		}
-		String winner = score.get(TURN_ORDER[0]);
-		for(int i = 1; i < score.length; i++){
+		int max = 0;
+		String winner = null;
+		for(int i = 0; i < NUMBER_OF_PLAYERS; i++){
 			if(score.get(TURN_ORDER[i]) > max){
-				winner = score.get(TURN_ORDER[i].getName());
+			winner = TURN_ORDER[i].getName();
+		
 			}
 		}
-		System.out.print(winner + " is the winner!");
+			System.out.println(winner + " is the winner!");
 		newGame();
 	}
 	
@@ -261,14 +268,25 @@ public class Deadwood {
 			setNewScene();
 		}
 	}
-	
+
+	private int findIndexPlayer(Players[] A, Players P){
+		int n = 0;
+		for (int i=0; i < NUMBER_OF_PLAYERS; i++){
+			if (A[i].getName().equals(P.getName())){
+			   n = i;
+		   }
+		}
+		return n;
+	}
 	//Create scene objects.
     private void createScenes(){
-        try(Scanner input = new Scanner(new File(scenes.txt))){
+       int i = 0;
+		 try(Scanner input = new Scanner(new File("scenes.txt"))){
         	input.useDelimiter("|");
             while(input.hasNext()){
-            	SCENES[input.next()] = new Scene();
-            }
+            	SCENES[i] = new Scene( input.next());
+            	i++;
+				}
         } catch (FileNotFoundException ex) { System.err.println("Error: File not found.");}
     }
 

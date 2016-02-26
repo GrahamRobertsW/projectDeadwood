@@ -146,7 +146,20 @@ public class Room{
 		this.Scene = set;
 		this.Scene.used(true);
 	}
-   
+
+   public HashMap<String, Role> getRoles(){
+		HashMap<String, Role> ret = new HashMap<String, Role>();
+		for (String S: extraRoles.keySet()){
+         ret.put(S, extraRoles.get(S));
+		}
+		if (this.Scene!=null){
+			for (String S : this.Scene.getRoles().keySet()){
+				ret.put(S, this.Scene.getRoles().get(S));
+		   }
+		}
+		return ret;
+	}
+
 	public Scene getScene(){
 		return this.Scene;
 	}

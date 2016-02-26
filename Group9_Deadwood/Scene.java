@@ -77,5 +77,7 @@ public class Scene{
 		return this.desc;
 	}
 
-	
+   public HashMap<String, Role> getRoles(){
+		return this.Roles;
+	}
 }

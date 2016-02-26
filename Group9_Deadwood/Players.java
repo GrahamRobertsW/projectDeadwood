@@ -6,13 +6,13 @@ import java.util.*;
 public class Players {
    private int credits;
    private int rank;
-   private double money;
+   private int money;
    private int rehearsalVal;
    private String name;
    private Room room;
    private Role role;
    private Scene scene;
-   Players(int credits, int rank, double money, int rehearsalVal, String name) {
+   Players(int credits, int rank, int money, int rehearsalVal, String name) {
       this.credits = credits;
       this.money = money;
       this.rehearsalVal = rehearsalVal;
@@ -42,11 +42,11 @@ public class Players {
       return this.name;
   }
   
-  public double getMoney() {
+  public int getMoney() {
       return this.money;
   }
   
-  public void setMoney(double n) {
+  public void setMoney(int n) {
       this.money = this.money + n;
   }
   
