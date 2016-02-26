@@ -8,6 +8,7 @@ public class Room{
 	private HashMap<String, Role> extraRoles;
 	private Scene Scene;
 	private String name;
+	private HashMap<String, Room> rooms;
 
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
@@ -50,5 +51,12 @@ public class Room{
 
    public void success(){
 		return;
+	}
+
+	public void setDoors(Room[] Rs){
+		for (Room R: Rs){
+			rooms.put(R.getName(), R);
+		}
+	   return;
 	}
 }
