@@ -8,13 +8,9 @@ public class Room{
 	private HashMap<String, Role> extraRoles;
 	private Scene Scene;
 	private String name;
-<<<<<<< HEAD
 	private HashMap<String, Room> rooms;
-
-=======
 	private Room[] doors;
 //	private Scene[] Scenes;
->>>>>>> master
 	Room(String N, Role[] Roles, int S){
 		this.name=N;
 		this.maxShots=S;
@@ -22,6 +18,7 @@ public class Room{
 		for (Role R : Roles){
 			extraRoles.put(R.getName(),R);
 		}
+		this.rooms=null;
 	}
 
 	Room(String N){
@@ -30,10 +27,7 @@ public class Room{
 		this.maxShots=0;
 		this.extraRoles=null;
 		this.Scene = null;
-	}
-
-	public setDoors(Room[] newDoors){
-		this.doors=newDoors;
+		this.rooms=null;
 	}
 
 	public String getName(){
@@ -69,7 +63,6 @@ public class Room{
 	public void success(){
 		return;
 	}
-<<<<<<< HEAD
 
 	public void setDoors(Room[] Rs){
 		for (Room R: Rs){
@@ -77,7 +70,6 @@ public class Room{
 		}
 	   return;
 	}
-=======
 /*
 	public void createScenes(){
 		
@@ -104,6 +96,4 @@ public class Room{
 		System.out.print("%s : %s.", this.Scene.getName() this.Scene.getDesc());
 	}
 */
->>>>>>> master
 }
->>>>>>> ad27253a6840235dd12d63f43c10497577b4d574
