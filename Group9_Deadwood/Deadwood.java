@@ -70,12 +70,27 @@ public class Deadwood {
 					switch (user_input) {
 						case "move":
 							string room_input = user_input.next();
+<<<<<<< HEAD
+							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+							//Check for valid entry.
+							if(RoomInput == null){
+								System.out.printline("Invalid room name.");
+								break;
+							}
+//							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
+//								System.out.printline("Invalid room name.");
+//								break;
+//							}
+							//Check if already on a role.
+							
+=======
 							//Check for valid entry.
 							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
 								System.out.printline("Invalid room name.");
 								break;
 							}
 							//Check if already on a role.
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
 							if (CURRENT_PLAYER.getRole() != NULL) {
 								System.out.println("You are on a role and can't move at this time.");
 								break;
@@ -84,11 +99,22 @@ public class Deadwood {
 								System.out.println("You have already moved this turn.");
 								break;
 							}
+<<<<<<< HEAD
+
+							//Check valid direction.
+							if(!CURRENT_PLAYER.move(RoomInput)){
+								break;
+							}
+							//Move.
+							
+							CURRENT_PLAYER.setRoom(RoomInput);
+=======
 							//Check valid direction.
 							
 							//Move.
 							Room roomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 							CURRENT_PLAYER.setRoom(roomInput);
+>>>>>>> c88edc63430440d26c99f89de599521b30f0d3aa
 							Has_Moved = true;
 							//Read card.
 							//Check if moving to a room where the scene has already finished.
