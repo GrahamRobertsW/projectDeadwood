@@ -12,32 +12,39 @@ public class Scene{
 	private ArrayList<Players> players;
 //	private boolean use;      
 	Scene(String input){
+//		System.out.println(input);
 		int rank;
 		String[] temp;
 		Role tempRole;
 		use = false;
 		success = false;
 		String[] values= input.split("~");
+		for (String S : values){
+			System.out.println(S);
+		}
 		name = values[1];
       desc= values[2];
 		this.players = new ArrayList<Players>();
 
 		try{
 			index=Integer.parseInt(values[0]);
+			System.out.printf("%d",index);
 			budget=Integer.parseInt(values[3]);
+			System.out.printf("%d", budget);
 		}
 		catch(NumberFormatException e){
 			System.out.format("Error parsing String to int is Scene %s",values[1]);
 		}
 		for (int i=4; i<values.length; i++){
-			temp = values[i].split(",");
+			temp = values[i].split("#");
 			try{
+				System.out.printf("%s", temp[2]);
 				rank=Integer.parseInt(temp[2]);
             tempRole=new Role(temp[0], temp[1], rank, 1);
             Roles.put(temp[0], tempRole);
 				}
 			catch(NumberFormatException g){
-				System.out.format("Error could not parse rank in Scene%s, Role%s", values[1], temp[0]);
+				System.out.format("Error could not parse rank in Scene: %s\n. Role: %s", values[1], temp[0]);
 			}
 		}
 	}

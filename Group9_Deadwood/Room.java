@@ -27,7 +27,7 @@ public class Room{
 	private Board board;
 
 	private Scene[] Scenes;
-	Room(String N, Role[] Roles, int S, Board B){
+	Room(String N, Role[] Roles, int S){
 // Constructor
 // passes hardcoded values for a rooms and its scene from the hardcoded Tile class extensions
 // passes a name N,
@@ -39,23 +39,26 @@ public class Room{
 		this.complete=false;
 		this.extraRoles = new HashMap<String, Role>();
 		for (Role R : Roles){
-			System.out.printf("%s\n", R.getName());
+//			System.out.printf("%s\n", R.getName());
 			extraRoles.put(R.getName(),R);
 		}
-		this.rooms=null;
+		this.rooms=new HashMap<String, Room>();
 		this.generator = new Random();
-		this.board=B;
+		//this.board=B;
 	}
-
-	Room(String N, Board B){
+   
+	Room(String N){
 		this.name=N;
 		this.shots=0;
 		this.maxShots=0;
 		this.extraRoles=null;
 		this.Scene = null;
-		this.rooms=null;
+		this.rooms=new HashMap<String,Room>();
 		this.complete=false;
 		this.generator = new Random();
+	}
+	public void setBoard(Board B){
+	   this.board=B;
 	}
 	public String getName(){
 		return name;
@@ -95,6 +98,7 @@ public class Room{
 		}
 		return;
 	}
+
    public void success(){
 	   ArrayList<Players> scenePlayers = this.Scene.getPlayers();
       if (scenePlayers.size()>0){
@@ -132,7 +136,6 @@ public class Room{
 		for (Room R: Rs){
 			rooms.put(R.getName(), R);
 		}
-	   return;
 	}
 
 	public HashMap<String, Room> getMoves(){

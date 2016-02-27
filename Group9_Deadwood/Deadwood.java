@@ -62,6 +62,8 @@ public class Deadwood {
 		TrainTile = new TrainTile((tileorder+3) % 3);*/
 		
 		Board board = new Board();
+		board.initializeBoard();
+		board.initializeTiles();
 		createScenes();
 		
 		//Set player count and initialize
@@ -287,13 +289,15 @@ public class Deadwood {
 	//Create scene objects.
     private void createScenes(){
        int i = 0;
-		 try(Scanner input = new Scanner(new File("scenes.txt"))){
-        	input.useDelimiter("|");
-            while(input.hasNext()){
-            	SCENES[i] = new Scene( input.next());
+		 try(Scanner input = new Scanner(new File("Group9_Deadwood/scenes.txt"))){
+   //     	input.useDelimiter(" | ");
+            while(input.hasNextLine()){
+					String temp = input.nextLine();
+//					System.out.println(temp);
+            	SCENES[i] = new Scene( temp);
             	i++;
 				}
-        } catch (FileNotFoundException ex) { System.err.println("Error: File not found.");}
+        } catch (FileNotFoundException ex) { System.err.println("Error: File not found."); System.exit(0);}
     }
 
 }

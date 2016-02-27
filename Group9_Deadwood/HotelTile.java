@@ -1,5 +1,6 @@
 package Group9_Deadwood;
 import java.util.HashMap;
+import java.util.Map;
 public class HotelTile extends Tile{
 	private HashMap<String, Room> Rooms = null;
 	private String[] names = {"Hotel", "Bank", "Church"};
@@ -7,11 +8,10 @@ public class HotelTile extends Tile{
    private int[] shots = {3,1,2};
    private Board board;
 	private Room[] outDoors;
-	HotelTile(int pos, Board B){
-		this.board=B;
+	HotelTile(int pos){
 		this.Rooms=new HashMap<String, Room>();
 		for (int i=0; i<names.length; i++){
-			Room temp=new Room(names[i], tempRoles[i], shots[i],B);
+			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			this.Rooms.put(temp.getName(), temp);
 			setOutDoors();
 		}
@@ -25,5 +25,20 @@ public class HotelTile extends Tile{
 	public Room[] getDoors(){
 		return this.outDoors;
 	}
+	public HashMap<String,Room> returnRooms(){
+		return this.Rooms;
+	}
+   public void setBoard(Board B){
+		this.board=B;
+		for (Map.Entry<String, Room> entry : Rooms.entrySet()){
+			entry.getValue().setBoard(B);
+		}
+	}
+	public Board getBoard(){
+		return this.board;
+	}
 
+	public Room getRoom(int i){
+		return this.outDoors[i];
+	}
 }
