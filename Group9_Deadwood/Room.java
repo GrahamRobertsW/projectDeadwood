@@ -37,7 +37,9 @@ public class Room{
 		this.maxShots=S;
 		this.shots=this.maxShots;
 		this.complete=false;
+		this.extraRoles = new HashMap<String, Role>();
 		for (Role R : Roles){
+			System.out.printf("%s\n", R.getName());
 			extraRoles.put(R.getName(),R);
 		}
 		this.rooms=null;

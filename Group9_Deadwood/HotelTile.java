@@ -6,7 +6,7 @@ public class HotelTile extends Tile{
 	private Role[][] tempRoles = {{new Role("Faro Player", "Hit Me!", 1, 0), new Role("Sleeping Drunkard", "Zzzzzz Whiskey", 1,0), new Role("Australian Bartender", "What'll it be, mate?", 3, 0), new Role("Falls from Balcony", "Arrrgghh!!", 2, 0)},{new Role("Flustered Teller", "Would you like a large bill, sir?", 3, 0), new Role("Suspicious Gentleman", "Can you be more specific?", 2, 0)},{new Role("Dead Man", "...", 1, 0), new Role("Crying Woman", "oh, the humanity!", 2, 0)}};	
    private int[] shots = {3,1,2};
    private Board board;
-	private Room[] Doors;
+	private Room[] outDoors;
 	HotelTile(int pos, Board B){
 		this.board=B;
 		this.Rooms=new HashMap<String, Room>();
@@ -18,8 +18,12 @@ public class HotelTile extends Tile{
    
 	}
    private Room[] setOutDoors(){
-		this.Doors =new Room[] {this.Rooms.get("Bank"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Church"), this.Rooms.get("Church"), this.Rooms.get("Bank")};
-      return Doors;
+		this.outDoors =new Room[] {this.Rooms.get("Bank"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Church"), this.Rooms.get("Church"), this.Rooms.get("Bank")};
+      return outDoors;
+	}
+
+	public Room[] getDoors(){
+		return this.outDoors;
 	}
 
 }

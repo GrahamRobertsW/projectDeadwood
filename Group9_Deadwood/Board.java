@@ -4,15 +4,17 @@ public class Board{
 	private HashMap<String, Tile> tiles;
 	private String[] keys;
 	private int sceneCount;
-   Board(){
+   public Board(){
 		sceneCount=0;
+		this.tiles=new HashMap<String, Tile>();
 		tiles.put("Train Station",new TrainTile(0,this));
 		tiles.put("Main Street",new MainStTile(1,this));
 		tiles.put("Hotel",new HotelTile(2,this));
 		tiles.put("Secret Hideout",new SecretTile(3,this));
 		keys = new String[] {"Train Station", "Main Street", "Hotel", "Secret Hideout"};
 		for (String i: keys){
-			tiles.get(i).setDoors();
+			System.out.printf("setting Doors for %s\n", i);
+			tiles.get(i).setDoors(tiles.get(i));
 	   }
 	}
    public Tile getTile(int i){

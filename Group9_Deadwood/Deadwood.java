@@ -16,15 +16,21 @@ public class Deadwood {
 	private int SCENE_COUNT;
 	private String[] PLAYER_NAMES = new String[] {"blue","red","yellow","orange","green","violet","pink","cyan"};
 
-	public void main(String[] args) {
+//	public static void main(String[] args) {
+//		newGame();
+//	}
+	public Deadwood(){
 		newGame();
 	}
-	
+   public static void main(String[] args){
+		Deadwood DW = new Deadwood();
+	}
+
 	private void newGame(){
 		Scanner user_input = new Scanner(System.in);
 		System.out.print("Start a new game? (y/n)");
 		String new_game = user_input.next();
-		if(new_game == "y"){
+		if(new_game.equals("y")){
 			// initialize variables here.
 			NUMBER_OF_PLAYERS = 0;
 			CURRENT_DAY = 0;
