@@ -18,24 +18,40 @@ import java.util.*;
 //}
 //Jpanel mainPanel = new JJPanel();
    public class swingtiles extends JFrame{
-      private swingtiles(){
-         JPanel main = new JPanel();
-         this.setSize(2060,1560);
-         BoxLayout rows=new BoxLayout(main, BoxLayout.Y_AXIS);
-         JPanel top = new JPanel();
-         JPanel bot = new JPanel();
-         main.setLayout(rows);
-         BoxLayout topBox = new BoxLayout(top,BoxLayout.X_AXIS);
-         BoxLayout botBox = new BoxLayout(bot,BoxLayout.X_AXIS);
-         top.setLayout(topBox);
-         bot.setLayout(botBox);
-         top.add(subtiles("MainStTile.png"));
-         top.add(subtiles("TrainTiles.png"));
-         bot.add(subtiles("SecretTile.png"));
-         bot.add(subtiles("HotelTile.png"));
-         main.setVisible(true);
-      }
-
+//      private swingtiles(){
+//         Container content = this.getContentPane();
+//         JPanel main = new JPanel();
+//         this.setSize(2060,1560);
+//         BoxLayout rows=new BoxLayout(main, BoxLayout.Y_AXIS);
+//         JPanel top = new JPanel();
+//         JPanel bot = new JPanel();
+//        main.setLayout(rows);
+//         BoxLayout topBox = new BoxLayout(top,BoxLayout.X_AXIS);
+//         BoxLayout botBox = new BoxLayout(bot,BoxLayout.X_AXIS);
+//         top.setLayout(topBox);
+//         bot.setLayout(botBox);
+//         top.add(subtiles("MainStTile.png"));
+//         top.add(subtiles("TrainTiles.png"));
+//         bot.add(subtiles("SecretTile.png"));
+//         bot.add(subtiles("HotelTile.png"));
+//         top.setVisible(true);
+//         bot.setVisible(true);
+//         main.setVisible(true);
+//         content.add(main);
+//         content.setVisible(true);
+//      }
+   private swingtiles(){
+      JPanel content = this.getContentPane();
+      content.setLayout(new GridLayout(2,2));
+      content.add(subtiles("HotelTile.png"));
+      content.add(subtiles("MainStTile.png"));
+      content.add(subtiles("SecretTile.png"));
+      content.add(subtiles("TrainTile.png"));
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      this.setVisible(true);
+      content.setVisible(true);
+      content.setResizeable(true);
+   }
       private JPanel subtiles(String arg){
          JPanel panel = new JPanel();
          panel.setSize(1030,780);
@@ -43,6 +59,8 @@ import java.util.*;
          JLabel label = new JLabel();
          label.setIcon(icon);
          panel.add(label);
+         panel.setVisible(true);
+      //   panel.setResizeable(true);
          return panel;
       }
 
