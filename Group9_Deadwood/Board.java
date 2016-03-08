@@ -7,10 +7,10 @@ public class Board{
    public Board(){
 		sceneCount=0;
 		this.tiles=new HashMap<String, Tile>();
-		tiles.put("Train Station",new TrainTile(0));
-		tiles.put("Main Street",new MainStTile(1));
-		tiles.put("Hotel",new HotelTile(2));
-		tiles.put("Secret Hideout",new SecretTile(3));
+		tiles.put("Train Station",new Tile("TrainTile.png"));
+		tiles.put("Main Street",new Tile("MainStTile.png"));
+		tiles.put("Hotel",new Tile("HotelTile.png"));
+		tiles.put("Secret Hideout",new Tile("SecretTile.png"));
 		keys = new String[] {"Train Station", "Main Street", "Hotel", "Secret Hideout"};
 		   
 	}
