@@ -23,7 +23,7 @@ public class Board{
 
    public void initializeTiles(){
 	   for (String i: keys){
-//	   	System.out.printf("setting Doors for %s\n", i);
+//t	   	System.out.printf("setting Doors for %s\n", i);
 	   	tiles.get(i).setDoors(tiles.get(i));
       }
 	}

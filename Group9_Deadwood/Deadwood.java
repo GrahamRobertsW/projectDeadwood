@@ -98,7 +98,7 @@ public class Deadwood {
 					//Current player turn options.
 					switch (input) {
 						case "move":
-                     System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getRoomName());
+                     System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
                      System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
 							String room_input = user_input.next();
 							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
@@ -191,7 +191,7 @@ public class Deadwood {
 							break;
 							
 						case "where":
-							System.out.println(CURRENT_PLAYER.getRoom() + " " + CURRENT_PLAYER.getRoom().getScene());
+							System.out.println(CURRENT_PLAYER.getRoom().getName() + " " + CURRENT_PLAYER.getRoom().getScene());
 							break;
 							
 						case "rehearse":

@@ -90,8 +90,9 @@ public class Room{
 	}
 
    public boolean printDoors() {
-      for(int i=1; i < this.doors.length; i++) {
-         System.out.println(doors[i].getRoomName());
+      for(int i=1; i < doors.length; i++) {
+			System.out.println(i);
+         System.out.println(doors[i].getName());
       }
       return true;
    }
