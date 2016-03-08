@@ -160,6 +160,9 @@ public abstract class Tile{
 		hor(list, R, doors, thisTile);
 		Room[] newArray=new Room[list.size()];
 		list.toArray(newArray);
+		for (Room r : newArray){
+		   System.out.printf(r.getName());
+		}
 		return newArray;
 	}
    
