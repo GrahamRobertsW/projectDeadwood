@@ -26,33 +26,33 @@ public class Tile{
 //		return outDoors[i];
 //	}
    Tile(String filename){
-		this.Rooms=new HashMap<String, Room>;
+		this.Rooms=new HashMap<String, Room>();
 		this.FN=filename;
 		Role[][] tempRoles;
 		int[] shots;
-		String names;
+		String[] names;
 		switch(filename){
 			case "HotelTile.png":
          	names = new String[] {"Hotel", "Bank", "Church"};
          	tempRoles = new Role[][]{{new Role("Faro Player", "Hit Me!", 1, 0), new Role("Sleeping Drunkard", "Zzzzzz Whiskey", 1,0), new Role("Australian Bartender", "What'll it be, mate?", 3, 0), new Role("Falls from Balcony", "Arrrgghh!!", 2, 0)},{new Role("Flustered Teller", "Would you like a large bill, sir?", 3, 0), new Role("Suspicious Gentleman", "Can you be more specific?", 2, 0)},{new Role("Dead Man", "...", 1, 0), new Role("Crying Woman", "oh, the humanity!", 2, 0)}};	
-            shots = {3,1,2};
+            shots = new int[] {3,1,2};
 				populateRooms(shots,names,tempRoles,this.Rooms);
             this.outDoors =new Room[] {this.Rooms.get("Bank"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Church"), this.Rooms.get("Church"), this.Rooms.get("Bank")};
 				break;
 
 			case "SecretTile.png":
-            tempRoles=new Room[][]{{new Role("clumsy Pit Fighter", "Hit Me!", 1, 0), new Role("Thug with Knife", "Meet Suzy, mu murderin' knife.", 2,0), new Role("Dangerous Tom", "/ther's two ways we can do this....", 3, 0), new Role("Penny, who is Lost", "Oh, woe! For I am Lost!", 4, 0)}, {new Role("Shot in Leg", "Ow, Me Leg!", 1, 0), new Role("Saucy Fred", "That's what she said!", 2, 0), new Role("Man Under Horse", "A little help here!", 3, 0)}};
+            tempRoles=new Role[][]{{new Role("clumsy Pit Fighter", "Hit Me!", 1, 0), new Role("Thug with Knife", "Meet Suzy, mu murderin' knife.", 2,0), new Role("Dangerous Tom", "/ther's two ways we can do this....", 3, 0), new Role("Penny, who is Lost", "Oh, woe! For I am Lost!", 4, 0)}, {new Role("Shot in Leg", "Ow, Me Leg!", 1, 0), new Role("Saucy Fred", "That's what she said!", 2, 0), new Role("Man Under Horse", "A little help here!", 3, 0)}};
 				shots=new int[]{3,2};
-				names=newString[]{"Secret Hideout", "Ranch"};
+				names=new String[]{"Secret Hideout", "Ranch"};
             this.Rooms.put("Casting Office",new Room("Casting Office"));
 				populateRooms(shots,names,tempRoles,this.Rooms);
 		      this.outDoors =new Room[] {Rooms.get("Casting Office"), Rooms.get("Ranch"), Rooms.get("Ranch"), Rooms.get("Secret Hideout"), Rooms.get("Secret Hideout"), Rooms.get("Secret Hideout"), Rooms.get("Secret Hideout"), Rooms.get("Casting Office")};
             break;
 
 			case "MainStTile.png":
-				names = String{"Main Street", "Saloon"};
+				names = new String[] {"Main Street", "Saloon"};
 	         tempRoles = new Role[][]{{new Role("Railroad Worker", "I'm a steel-drivin' man!", 1, 0), new Role("Falls off Roof", "Aaaaiiiiigggghh!", 2, 0), new Role("woman in Black Dress", "Well, I'll be!", 2, 0), new Role("Mayor McGinty", "People of Deadwood!", 4, 0)},{new Role("Woman in Red Dress", "Come up and see me!", 2,0), new Role("reluctant Farmer", "I ain't so sure about that!", 1, 0)}};
-	         shots ={3,2};
+	         shots = new int[] {3,2};
             this.Rooms.put("Trailers", new Room("Trailers"));
 				populateRooms(shots,names,tempRoles,this.Rooms);
 		      this.outDoors = new Room[]{Rooms.get("Main Street"),Rooms.get("Main Street"),Rooms.get("Main Street"),Rooms.get("Trailers"),Rooms.get("Trailers"),Rooms.get("Saloon"),Rooms.get("Saloon"),Rooms.get("Main Street")};
@@ -68,7 +68,7 @@ public class Tile{
          }
 	   }
    
-   private void populateRooms(int[] shots, String[] names, Role[][] temp, HashMap<String, Room> hashbrowns){
+   private void populateRooms(int[] shots, String[] names, Role[][] tempRoles, HashMap<String, Room> hashbrowns){
 		for (int i=0; i<names.length; i++){
 			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			hashbrowns.put(names[i],temp);
@@ -104,7 +104,7 @@ public class Tile{
 	private void vert(ArrayList<Room> list, Room R, int[] doors){
 		if (pos<2){
 //n			System.out.println("board is: "+ thisTile.getBoard());
-			Tile Temp=thisTile.getBoard().getTile(pos+2);
+         Tile Temp= this.getBoard().getTile(pos+2);
 			for (int i: doors){
 				switch(i){
 					case 0:
@@ -218,13 +218,13 @@ public class Tile{
    
 
 	public void setDoors(){
-		Room[] doors = null;
+		Room[] doors;
 		Room temp;
-//		System.out.println("thisTile.getDoors: " + Arrays.toString(this.outDoors));
+		System.out.println("thisTile.getDoors: " + Arrays.toString(this.outDoors));
 		for (Room R : this.outDoors){
-		//	System.out.printf("%s",R.getName());
-			if (!(this.Rooms.containsKey(R.getName()))){
-				this.Rooms().put(R.getName(),R);
+			if (( R != null) & !(this.Rooms.containsKey(R.getName()))){
+            System.out.println("hello");
+				this.Rooms.put(R.getName(),R);
 			}
 		}
 		for (String R : this.Rooms.keySet()){
@@ -243,11 +243,11 @@ public class Tile{
 	}
 
    public Room[] getDoors(){
-		return this.Rooms;
+		return this.outDoors;
 	}
    
    public void setBoard(Board B){
-		this.Board=B;
+		this.board=B;
 	}
    
    public HashMap<String, Room> returnRooms(){
