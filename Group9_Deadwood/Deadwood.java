@@ -98,94 +98,11 @@ public class Deadwood {
 					//Current player turn options.
 					switch (input) {
 						case "move":
-                     System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
-                     System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
-							String room_input = user_input.next();
-							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
-							//Check for valid entry.
-							if(RoomInput == null){
-								System.out.println("Invalid room name.");
-								break;
-							}
-//							if(room_input != ("Bank" || "Main Street" || "Trailers" || "Saloon" || "Church" || "Scret Hideout" || "Casting Office" || "Train Station" || "Jail" || "General Store" || "Ranch" || "Hotel")){
-//								System.out.printline("Invalid room name.");
-//								break;
-//							}
-							//Check if already on a role.
-							
-							if (CURRENT_PLAYER.getRole() != null) {
-								System.out.println("You are on a role and can't move at this time.");
-								break;
-							}
-							if (Has_Moved == true){
-								System.out.println("You have already moved this turn.");
-								break;
-							}
-
-							//Check valid direction.
-							if(!CURRENT_PLAYER.move(RoomInput)){
-								break;
-							}
-							//Move.
-							
-							CURRENT_PLAYER.setRoom(RoomInput);
-							Has_Moved = true;
-							//Read card.
-							//Check if moving to a room where the scene has already finished.
-							if(CURRENT_PLAYER.getRoom().checkSuccess() == true){
-								System.out.println("This scene has already been completed.");
-								break;
-							}
-							//Create a new scene, or report the current scene.
-							if(CURRENT_PLAYER.getRoom().getScene() == null) {
-								setNewScene();
-								System.out.println("New Scene: " + CURRENT_PLAYER.getRoom().getScene().getName() + " : " + CURRENT_PLAYER.getRoom().getScene().getDesc());
-								break;
-							} else {
-								System.out.println("The current scene is: " + CURRENT_PLAYER.getRoom().getScene().getName() + " : " + CURRENT_PLAYER.getRoom().getScene().getDesc());
-								break;
-							}
-							
+                     Valid_Entry = move(Has_Moved);
 						case "work":
-							String role_input = user_input.next();
-							//Check if already working on a role.
-							if (CURRENT_PLAYER.getRole() != null) {
-								System.out.println("You are already working a role.");
-								break;
-							}
-							//Check if someone else is working on the role.
-							if(CURRENT_PLAYER.getRole().isTaken() == true) {
-								System.out.println("Someone is already on this role.");
-								break;
-							}
-							//Set role.
-							CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input));
-							break;
-							
+                     Valid_Entry = work();	
 						case "upgrade":
-							//Check if in the casting office.
-							if(CURRENT_PLAYER.getRoom().equals("Casting Office")){
-								String currency_input = user_input.next();
-								//Check second input and upgade if eligible.
-								switch (currency_input){
-									case "$":
-										int dollar_input = user_input.nextInt();
-										CURRENT_PLAYER.rankMoney(dollar_input);
-										break;
-									case "cr":
-										int credit_input = user_input.nextInt();
-										CURRENT_PLAYER.rankCredits(credit_input);
-										break;
-									default:
-										System.out.println("Invalid input.");
-										break;
-								}
-							} else {
-								System.out.println("You are not in the Casting Office.");
-								break;
-							}
-							break;
-							
+							Valid_Entry = upgrade();
 						case "who":
 							System.out.println(CURRENT_PLAYER.getName() + " " + CURRENT_PLAYER.getRole());
 							break;
@@ -258,6 +175,80 @@ public class Deadwood {
 		newGame();
 	}
 	
+   private boolean move(boolean moved) {
+      System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
+      System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
+      Scanner user_input = new Scanner (System.in);
+      String room_input = user_input.next();      
+      Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+      //Check for valid entry.
+      if(RoomInput == null){
+         System.out.println("Invalid room name.");
+         return false;
+      }
+
+      if (CURRENT_PLAYER.getRole() != null) {
+         System.out.println("You are on a role and can't move at this time.");
+          return false;
+      }
+      if (moved == true){
+         System.out.println("You have already moved this turn.");
+         return false;
+      }
+
+      //Check valid direction.
+      if(!CURRENT_PLAYER.move(RoomInput)){
+         return false;
+      }  
+      return true; 
+   }
+   
+   private boolean work() {
+      boolean valid = false;
+      //Check if already working on a role.
+      if (CURRENT_PLAYER.getRole() != null) {
+         System.out.println("You are already working a role.");
+         return valid;
+      } 
+      System.out.println("Choose a role to take: " + CURRENT_PLAYER.getRoom().printRoles());
+      Scanner role_input = new Scanner(System.in);
+      //Check if someone else is working on the role.
+      if(CURRENT_PLAYER.getRole().isTaken() == true) {
+         System.out.println("Someone is already on this role.");
+         return valid;
+      }
+      //Set role.
+      CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input));
+      valid = true;
+      return valid;				   
+   }
+   
+   private boolean upgrade() {
+      boolean valid = false;
+      Scanner user_input = new Scanner (System.in);
+      //Check if in the casting office.
+		if(CURRENT_PLAYER.getRoom().equals("Casting Office")){
+			String currency_input = user_input.next();
+			//Check second input and upgade if eligible.
+			switch (currency_input){
+	   		case "$":
+			   	int dollar_input = user_input.nextInt();
+					valid = CURRENT_PLAYER.rankMoney(dollar_input);
+					return valid;
+				case "cr":
+					int credit_input = user_input.nextInt();
+					valid = CURRENT_PLAYER.rankCredits(credit_input);
+					return valid;
+				default:
+					System.out.println("Invalid input.");
+					return valid;
+			}
+		} else {
+			System.out.println("You are not in the Casting Office.");
+			return valid;
+		}
+   }
+   
 	private int calculateScore(Players player){
 		return player.getMoney() + player.getCredits() +(player.getRank() * 5);
 	}

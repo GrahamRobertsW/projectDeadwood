@@ -68,6 +68,13 @@ public class Room{
 		return this.shots;
 	}
 
+   public boolean printRoles() {
+   	for (Role entry : this.extraRoles.values()){
+			System.out.println(entry.getName() + " Hello");
+		}
+      return true;
+   }
+
 	public int decShots(){
 		this.shots--;
 		return this.shots;
