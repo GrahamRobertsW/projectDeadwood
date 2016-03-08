@@ -39,4 +39,7 @@ public class MainStTile extends Tile{
 	public Room getRoom(int i){
 		return this.outDoors[i];
 	}
+	public Room findTrailers(){
+		return this.Rooms.get("Trailers");
+	}   
  }

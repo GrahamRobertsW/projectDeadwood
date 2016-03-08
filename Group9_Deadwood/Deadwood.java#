@@ -15,7 +15,10 @@ public class Deadwood {
 	private Players CURRENT_PLAYER;
 	private int SCENE_COUNT;
 	private String[] PLAYER_NAMES = new String[] {"blue","red","yellow","orange","green","violet","pink","cyan"};
-   
+
+//	public static void main(String[] args) {
+//		newGame();
+//	}
 	public Deadwood(){
 		newGame();
 	}
@@ -41,7 +44,7 @@ public class Deadwood {
 	}
 	
 	private void createTurnOrder(int ordernum){
-		TURN_ORDER[ordernum] = new Players(0, 1, 0, 0, PLAYER_NAMES[ordernum]);
+		TURN_ORDER[ordernum] = new Players();
       //int i = (int)(Math.random() * NUMBER_OF_PLAYERS);
 		/*if(TURN_ORDER[ordernum] == null){
  	               TURN_ORDER[ordernum] = new Players();
@@ -65,20 +68,16 @@ public class Deadwood {
 		createScenes();
 		
 		//Set player count and initialize
-		System.out.println("How many players? Between 3 and 8. ");
+		System.out.println("How many players?");
 		Scanner player_num = new Scanner (System.in);
 		NUMBER_OF_PLAYERS = player_num.nextInt();
-      while (NUMBER_OF_PLAYERS < 3 || NUMBER_OF_PLAYERS > 8) {
-         System.out.println("Please choose input between 3 and 8.");
-         NUMBER_OF_PLAYERS = player_num.nextInt();
-      }
       TURN_ORDER = new Players[NUMBER_OF_PLAYERS];
 		
 		//Initialize the players. Still needs randomization.
 		for(int i=0; i < NUMBER_OF_PLAYERS; i++){
 			createTurnOrder(i);
 		}
-		Room Trailers=board.getTile(1).findTrailers();
+		//Room Trailers=board.findTrailers();
 		for (Players P: TURN_ORDER){
 			P.setRoom(Trailers);
 		}
@@ -87,19 +86,17 @@ public class Deadwood {
 		setTurn(0);
 		while(CURRENT_DAY < 3){
 			while(SCENE_COUNT < 9) {
-				System.out.println(CURRENT_PLAYER.getName() + "'s turn. Enter an action. Options: move, work, act, rehearse, who, where, upgrade, end");
+				System.out.println(CURRENT_PLAYER.getName() + "'s turn. Enter an action.");
 				boolean Valid_Entry = false;
 				boolean Has_Moved = false;
 				boolean Has_Worked = false;
 				while(!Valid_Entry){
-					//System.out.println("Enter a command. ");
+					System.out.println("Enter a command.");
 					Scanner user_input = new Scanner (System.in);
 					String input = user_input.next();
 					//Current player turn options.
 					switch (input) {
 						case "move":
-                     System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getRoomName());
-                     System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
 							String room_input = user_input.next();
 							Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 							//Check for valid entry.

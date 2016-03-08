@@ -182,23 +182,24 @@ public abstract class Tile{
 		return;
 	}
 
-	public Room findTrailers(){
-		return this.Rooms.get("Trailers");
-	}
-public abstract Board getBoard();
+   public Room findTrailers(){
+   		return this.Rooms.get("Trailers");
+   	}
+   public abstract Board getBoard();
+   
+   public abstract Room[] getDoors();
+   
+   public abstract void setBoard(Board B);
+   
+   public abstract HashMap<String, Room> returnRooms();
 
-public abstract Room[] getDoors();
-
-public abstract void setBoard(Board B);
-
-public abstract HashMap<String, Room> returnRooms();
-
-public abstract Room getRoom(int i);
+   public abstract Room getRoom(int i);
 }
-//Tile(int position, HashMap<String,  R){
-//	this.poition=pos;
-//	this.rooms = new HashMap<String, Room>
-//	for each Room in R{
-//		temp = new Room(
-//		insert into rooms
-
+   //Tile(int position, HashMap<String,  R){
+   //	this.poition=pos;
+   //	this.rooms = new HashMap<String, Room>
+   //	for each Room in R{
+   //		temp = new Room(
+   //		insert into rooms
+   
+                     

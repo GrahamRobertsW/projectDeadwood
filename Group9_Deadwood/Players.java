@@ -16,10 +16,20 @@ public class Players {
       this.credits = credits;
       this.money = money;
       this.rehearsalVal = rehearsalVal;
-      this.name = null;;
+      this.name = name;
       this.room = room;
       this.role = null;
 		this.scene=null;
+   }
+   
+   Players() {
+      this.credits = 0;
+      this.money = 0;
+      this.rehearsalVal = 0;
+      this.name = null;;
+      this.room = null;
+      this.role = null;
+		this.scene=null;      
    }
    
    public Players getPlayer(){

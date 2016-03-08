@@ -13,7 +13,7 @@ public class Room{
 // rooms a hashmap of rooms adjacent to this one
 // doors an array of doors that this room is connected to
 // generator a random number generator 
-// complete a boolean describing whether or not a scene has been completed that dfay
+// complete a boolean describing whether or not a scene has been completed that day
    private int shots;
 	private int maxShots;
 	private HashMap<String, Role> extraRoles;
@@ -81,11 +81,21 @@ public class Room{
    public int getBudget(){
 		return this.Scene.getBudget();
 	}
+   public String getRoomName(){
+      return this.name;
+   }
 
    public Room[] getDoors(){
 		return this.doors;
 	}
 
+   public boolean printDoors() {
+      for(int i=1; i < this.doors.length; i++) {
+         System.out.println(doors[i].getRoomName());
+      }
+      return true;
+   }
+   
 	public void roleSort(ArrayList<Players> Ps){
 		Players temp;
 		for (int i=Ps.size(); i>1; i--){
