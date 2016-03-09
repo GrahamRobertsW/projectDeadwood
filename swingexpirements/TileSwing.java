@@ -10,6 +10,8 @@ public class TileSwing extends JFrame{
 //      int W=1920;
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //      this.setSize(W,H);
+      JPanel interfACE = new JPanel();
+      interfACE.setLayout(new BoxLayout(interfACE, BoxLayout.Y_AXIS));
       JPanel panel = new JPanel();
       panel.setLayout(new GridLayout(2,2));
  //     this.setResizeable(false);
@@ -21,7 +23,10 @@ public class TileSwing extends JFrame{
       panel.add(TrainL);
       JLabel SecretL = createImgLabel("SecretTile.png");
       panel.add(SecretL);
-      this.getContentPane().add(panel);
+      JTextField interactions = new JTextField(20);
+      interfACE.add(panel);
+      interfACE.add(interactions);
+      this.getContentPane().add(interfACE);
 //		this.getContentPane().pack();
    }
 //   TileSwing(){
