@@ -102,6 +102,7 @@ public class Players {
   
   public void setRole(Role R) {
       this.role=R;
+		R.setPlayer(this);
 		return;
   }
   

@@ -108,11 +108,11 @@ public class Deadwood {
 							upgrade();
                      break;
 						case "who":
-							System.out.println(CURRENT_PLAYER.getName() + " " + CURRENT_PLAYER.getRole());
+							System.out.println(CURRENT_PLAYER.getName() + " " + CURRENT_PLAYER.getRole().getName());
 							break;
 							
 						case "where":
-							System.out.println(CURRENT_PLAYER.getRoom().getName() + " " + CURRENT_PLAYER.getRoom().getScene());
+							System.out.println(CURRENT_PLAYER.getRoom().getName() + " " + CURRENT_PLAYER.getRoom().getScene().getName());
 							break;
 							
 						case "rehearse":
@@ -187,7 +187,7 @@ public class Deadwood {
       System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
       System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
       Scanner user_input = new Scanner (System.in);
-      String room_input = user_input.next();      
+      String room_input = user_input.nextLine();      
       Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 
       //Check for valid entry.
@@ -206,6 +206,10 @@ public class Deadwood {
       if(!CURRENT_PLAYER.move(RoomInput)){
          return false;
       }
+		if(CURRENT_PLAYER.getRoom().getScene()==null&&!CURRENT_PLAYER.getRoom().isComplete()){
+			CURRENT_PLAYER.getRoom().setScene(this.SCENES[SCENE_COUNT]);
+			this.SCENE_COUNT++;
+		}
       return true;
    }
    
@@ -221,11 +225,17 @@ public class Deadwood {
       } 
       
       System.out.println("Current player room: " + CURRENT_PLAYER.getRoom().getName());
-      System.out.print("Choose a role to take: ");
+      System.out.println("Choose a role to take: ");
       CURRENT_PLAYER.getRoom().printRoles();
       Scanner input = new Scanner(System.in);
-      String role_input = input.next();
+      String role_input = input.nextLine();
       //Check if someone else is working on the role.
+		while (!(CURRENT_PLAYER.getRoom().getRoles().keySet().contains(role_input))){
+	      System.out.print("Choose a role to take: ");
+         CURRENT_PLAYER.getRoom().printRoles();
+         role_input = input.nextLine();
+		}
+
       if(CURRENT_PLAYER.getRole() != null &&(CURRENT_PLAYER.getRole().isTaken() == true)) {
          System.out.println("Someone is already on this role.");
          return;
@@ -233,6 +243,7 @@ public class Deadwood {
       //Set role.
       System.out.println(CURRENT_PLAYER.getRoom().getRoles().keySet());
       System.out.println("Role??? " + CURRENT_PLAYER.getRoom().getRoles().keySet().contains(role_input));
+		System.out.println("role_input:"+role_input);
       CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input));
       System.out.println("Congrats! You're an actor now! Role accepted: " + CURRENT_PLAYER.getRole().getName());
       return;				   
@@ -299,12 +310,18 @@ public class Deadwood {
 	}
 	//Create scene objects.
     private void createScenes(){
-       int i = 0;
+       ArrayList<Scene> deck = new ArrayList<Scene>();
 		 try(Scanner input = new Scanner(new File("Group9_Deadwood/scenes.txt"))){
             while(input.hasNextLine()){
 					String temp = input.nextLine();
-            	SCENES[i] = new Scene(temp);
-            	i++;
+            	deck.add( new Scene(temp));
+            
+				}
+				Collections.shuffle(deck);
+				int i=0;
+				for (Scene S: deck){
+					SCENES[i]=S;
+					i++;
 				}
         } catch (FileNotFoundException ex) { System.err.println("Error: File not found."); System.exit(0);}
     }

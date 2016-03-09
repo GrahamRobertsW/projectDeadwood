@@ -75,13 +75,19 @@ public class Room{
    			System.out.println(entry.getName());
          } 
 		}
+		for (Role sceneR:this.Scene.getRoles().values()){
+			System.out.println(sceneR.getName());
+		}
    }
 
 	public int decShots(){
 		this.shots--;
 		return this.shots;
 	}
-
+   
+	public boolean isComplete(){
+		return this.complete;
+	}
 	public int reset(){
 		this.shots=this.maxShots;
 		return this.shots;
