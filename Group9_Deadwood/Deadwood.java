@@ -87,22 +87,26 @@ public class Deadwood {
 		setTurn(0);
 		while(CURRENT_DAY < 3){
 			while(SCENE_COUNT < 9) {
-				System.out.println(CURRENT_PLAYER.getName() + "'s turn. Enter an action. Options: move, work, act, rehearse, who, where, upgrade, end");
-				boolean Valid_Entry = false;
+				
+				boolean New_Turn = false;
 				boolean Has_Moved = false;
 				boolean Has_Worked = false;
-				while(!Valid_Entry){
+				while(!New_Turn){
+               System.out.println(CURRENT_PLAYER.getName() + "'s turn. Enter an action. Options: move, work, act, rehearse, who, where, upgrade, end");
 					//System.out.println("Enter a command. ");
 					Scanner user_input = new Scanner (System.in);
 					String input = user_input.next();
 					//Current player turn options.
 					switch (input) {
 						case "move":
-                     Valid_Entry = move(Has_Moved);
+                     Has_Moved = move(Has_Moved);
+                     break;
 						case "work":
-                     Valid_Entry = work();	
+                     work(Has_Worked);
+                     break;
 						case "upgrade":
-							Valid_Entry = upgrade();
+							upgrade();
+                     break;
 						case "who":
 							System.out.println(CURRENT_PLAYER.getName() + " " + CURRENT_PLAYER.getRole());
 							break;
@@ -143,7 +147,7 @@ public class Deadwood {
 							int n=findIndexPlayer(TURN_ORDER, CURRENT_PLAYER);
                      n++;
 							setTurn(n);
-							Valid_Entry = true;
+							New_Turn = true;
 							break;
 							
 						default:
@@ -176,54 +180,65 @@ public class Deadwood {
 	}
 	
    private boolean move(boolean moved) {
+       if (moved == true){
+         System.out.println("You have already moved this turn.");
+         return true;
+      }
       System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
       System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
       Scanner user_input = new Scanner (System.in);
       String room_input = user_input.next();      
       Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
+
       //Check for valid entry.
-      if(RoomInput == null){
+      if(room_input == null){
          System.out.println("Invalid room name.");
          return false;
       }
+      System.out.println("Room key " + room_input);
 
       if (CURRENT_PLAYER.getRole() != null) {
          System.out.println("You are on a role and can't move at this time.");
           return false;
       }
-      if (moved == true){
-         System.out.println("You have already moved this turn.");
-         return false;
-      }
 
       //Check valid direction.
       if(!CURRENT_PLAYER.move(RoomInput)){
          return false;
-      }  
-      return true; 
+      }
+      return true;
    }
    
-   private boolean work() {
-      boolean valid = false;
+   private void work(boolean Has_Worked) {
+      if (Has_Worked == true) {
+         System.out.println("Get out. While you still can...(You've already worked)");
+         return;
+      }
       //Check if already working on a role.
       if (CURRENT_PLAYER.getRole() != null) {
          System.out.println("You are already working a role.");
-         return valid;
+         return;
       } 
-      System.out.println("Choose a role to take: " + CURRENT_PLAYER.getRoom().printRoles());
-      Scanner role_input = new Scanner(System.in);
+      
+      System.out.println("Current player room: " + CURRENT_PLAYER.getRoom().getName());
+      System.out.print("Choose a role to take: ");
+      CURRENT_PLAYER.getRoom().printRoles();
+      Scanner input = new Scanner(System.in);
+      String role_input = input.next();
       //Check if someone else is working on the role.
-      if(CURRENT_PLAYER.getRole().isTaken() == true) {
+      if(CURRENT_PLAYER.getRole() != null &&(CURRENT_PLAYER.getRole().isTaken() == true)) {
          System.out.println("Someone is already on this role.");
-         return valid;
+         return;
       }
       //Set role.
+      System.out.println(CURRENT_PLAYER.getRoom().getRoles().keySet());
+      System.out.println("Role??? " + CURRENT_PLAYER.getRoom().getRoles().keySet().contains(role_input));
       CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input));
-      valid = true;
-      return valid;				   
+      System.out.println("Congrats! You're an actor now! Role accepted: " + CURRENT_PLAYER.getRole().getName());
+      return;				   
    }
    
-   private boolean upgrade() {
+   private void upgrade() {
       boolean valid = false;
       Scanner user_input = new Scanner (System.in);
       //Check if in the casting office.
@@ -234,18 +249,18 @@ public class Deadwood {
 	   		case "$":
 			   	int dollar_input = user_input.nextInt();
 					valid = CURRENT_PLAYER.rankMoney(dollar_input);
-					return valid;
+               return;
 				case "cr":
 					int credit_input = user_input.nextInt();
 					valid = CURRENT_PLAYER.rankCredits(credit_input);
-					return valid;
+					return;
 				default:
 					System.out.println("Invalid input.");
-					return valid;
+					return;
 			}
 		} else {
 			System.out.println("You are not in the Casting Office.");
-			return valid;
+			return;
 		}
    }
    

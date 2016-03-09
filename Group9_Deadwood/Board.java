@@ -7,17 +7,22 @@ public class Board{
    public Board(){
 		sceneCount=0;
 		this.tiles=new HashMap<String, Tile>();
-		tiles.put("Train Station",new Tile("TrainTile.png"));
-		tiles.put("Main Street",new Tile("MainStTile.png"));
-		tiles.put("Hotel",new Tile("HotelTile.png"));
-		tiles.put("Secret Hideout",new Tile("SecretTile.png"));
-		keys = new String[] {"Train Station", "Main Street", "Hotel", "Secret Hideout"};
+      Tile TrainTile = new Tile("TrainTile.png");
+		tiles.put("Train Station",TrainTile);
+      Tile MainTile = new Tile("MainStTile.png");
+		tiles.put("Main Street",MainTile);
+      Tile HotelTile = new Tile("HotelTile.png");
+		tiles.put("Hotel",HotelTile);
+      Tile SecretTile = new Tile("SecretTile.png");
+		tiles.put("Secret Hideout",SecretTile);
+		keys = new String[] {"Train Station", "Main Street", "Secret Hideout", "Hotel"};
 		   
 	}
    public void initializeBoard(){
 	   for (String i: keys){
 //	   	System.out.printf("setting Doors for %s\n", i);
 			tiles.get(i).setBoard(this);
+         //System.out.println("setting doors");
       }
 	}
 
@@ -25,6 +30,7 @@ public class Board{
 	   for (String i: keys){
 //t	   	System.out.printf("setting Doors for %s\n", i);
 	   	tiles.get(i).setDoors();
+         //System.out.println("Get Doors: " + tiles.get(i).getDoors());
       }
 	}
 

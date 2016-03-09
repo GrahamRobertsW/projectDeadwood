@@ -36,13 +36,15 @@ public class Tile{
          	names = new String[] {"Hotel", "Bank", "Church"};
          	tempRoles = new Role[][]{{new Role("Faro Player", "Hit Me!", 1, 0), new Role("Sleeping Drunkard", "Zzzzzz Whiskey", 1,0), new Role("Australian Bartender", "What'll it be, mate?", 3, 0), new Role("Falls from Balcony", "Arrrgghh!!", 2, 0)},{new Role("Flustered Teller", "Would you like a large bill, sir?", 3, 0), new Role("Suspicious Gentleman", "Can you be more specific?", 2, 0)},{new Role("Dead Man", "...", 1, 0), new Role("Crying Woman", "oh, the humanity!", 2, 0)}};	
             shots = new int[] {3,1,2};
+            pos = 3;
 				populateRooms(shots,names,tempRoles,this.Rooms);
             this.outDoors =new Room[] {this.Rooms.get("Bank"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Hotel"), this.Rooms.get("Church"), this.Rooms.get("Church"), this.Rooms.get("Bank")};
 				break;
 
 			case "SecretTile.png":
-            tempRoles=new Role[][]{{new Role("clumsy Pit Fighter", "Hit Me!", 1, 0), new Role("Thug with Knife", "Meet Suzy, mu murderin' knife.", 2,0), new Role("Dangerous Tom", "/ther's two ways we can do this....", 3, 0), new Role("Penny, who is Lost", "Oh, woe! For I am Lost!", 4, 0)}, {new Role("Shot in Leg", "Ow, Me Leg!", 1, 0), new Role("Saucy Fred", "That's what she said!", 2, 0), new Role("Man Under Horse", "A little help here!", 3, 0)}};
+            tempRoles=new Role[][]{{new Role("clumsy Pit Fighter", "Hit Me!", 1, 0), new Role("Thug with Knife", "Meet Suzy, my murderin' knife.", 2,0), new Role("Dangerous Tom", "/ther's two ways we can do this....", 3, 0), new Role("Penny, who is Lost", "Oh, woe! For I am Lost!", 4, 0)}, {new Role("Shot in Leg", "Ow, Me Leg!", 1, 0), new Role("Saucy Fred", "That's what she said!", 2, 0), new Role("Man Under Horse", "A little help here!", 3, 0)}};
 				shots=new int[]{3,2};
+            pos = 2;
 				names=new String[]{"Secret Hideout", "Ranch"};
             this.Rooms.put("Casting Office",new Room("Casting Office"));
 				populateRooms(shots,names,tempRoles,this.Rooms);
@@ -51,8 +53,9 @@ public class Tile{
 
 			case "MainStTile.png":
 				names = new String[] {"Main Street", "Saloon"};
-	         tempRoles = new Role[][]{{new Role("Railroad Worker", "I'm a steel-drivin' man!", 1, 0), new Role("Falls off Roof", "Aaaaiiiiigggghh!", 2, 0), new Role("woman in Black Dress", "Well, I'll be!", 2, 0), new Role("Mayor McGinty", "People of Deadwood!", 4, 0)},{new Role("Woman in Red Dress", "Come up and see me!", 2,0), new Role("reluctant Farmer", "I ain't so sure about that!", 1, 0)}};
+	         tempRoles = new Role[][]{{new Role("Railroad Worker", "I'm a steel-drivin' man!", 1, 0), new Role("Falls off Roof", "Aaaaiiiiigggghh!", 2, 0), new Role("woman in Black Dress", "Well, I'll be!", 2, 0), new Role("Mayor McGinty", "People of Deadwood!", 4, 0)},{new Role("Woman in Red Dress", "Come up and see me!", 2,0), new Role("Reluctant Farmer", "I ain't so sure about that!", 1, 0)}};
 	         shots = new int[] {3,2};
+            pos = 1;
             this.Rooms.put("Trailers", new Room("Trailers"));
 				populateRooms(shots,names,tempRoles,this.Rooms);
 		      this.outDoors = new Room[]{Rooms.get("Main Street"),Rooms.get("Main Street"),Rooms.get("Main Street"),Rooms.get("Trailers"),Rooms.get("Trailers"),Rooms.get("Saloon"),Rooms.get("Saloon"),Rooms.get("Main Street")};
@@ -62,6 +65,7 @@ public class Tile{
             names=new String[]{"Train Station","General Store", "Jail"};
 	         tempRoles=new Role[][]{{new Role("Crusty Prospector", "Aww, peaches!", 1,0), new Role("Dragged by Train", "Omgeezers", 1, 0), new Role("Preacher with Ba", "The Lord will provide", 2, 0), new Role("Cyrus the Gunfighter", "Git to fightin' or git away!", 4,0)},{new Role("Man in Overalls", "Look like a storm's comin' in.", 1, 0), new Role("Mister Keach", "Howdy, stranger.", 3, 0)}, {new Role("Prisoner in Cell", "Zzzzzzz... Whiskey", 2, 0), new Role("Feller in Irons", "Ah kilt the wrong man!", 3, 0)}};
 	         shots=new int[]{3,2,1};
+            pos = 0;
 				populateRooms(shots,names,tempRoles,this.Rooms);
             this.outDoors=new Room[] {Rooms.get("Train Station"), Rooms.get("Jail"), Rooms.get("Jail"), Rooms.get("General Store"), Rooms.get("General Store"), Rooms.get("Train Station"), Rooms.get("Train Station"), Rooms.get("Train Station")};
             break;
@@ -72,15 +76,17 @@ public class Tile{
 		for (int i=0; i<names.length; i++){
 			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			hashbrowns.put(names[i],temp);
-		return;
+         System.out.println("populateRooms " + names[i]);
 	   }
 	}
 	private int[] iDoors(Room R){
 		ArrayList<Integer> indecies= new ArrayList<Integer>();
 		String name = R.getName();
 		for (int i=0; i<8; i++){
-			if (name == this.outDoors[i].getName()){
-				indecies.add(i);
+			if (this.outDoors[i] != null)  {
+            if (name == this.outDoors[i].getName()){
+				   indecies.add(i);
+            }
 			}
 		}
 		int tempsize=indecies.size();
@@ -90,19 +96,29 @@ public class Tile{
 		}
 		return DoorList;
 	}
-
+   
+   public String getFN(){
+      return this.FN;
+   }
+   
 	private boolean RoomCMP(Room a, Room b){
-		return(a.getName().equals(b.getName()));
+      if (a != null && b != null) {
+   		return(a.getName().equals(b.getName()));
+      }
+      else {
+         return false;
+      }
 	}
-
+   //Is this an and??? or is it an or????? Find out the hard way
 	private void insertIntoDoors(Room newRoom, ArrayList<Room> list, Room me){
-		if (!(RoomCMP(newRoom, me)||list.contains(newRoom))){
+		if (!(RoomCMP(newRoom, me))&& !(list.contains(newRoom))){
 			list.add(newRoom);
 		}
 		return;
 	}
 	private void vert(ArrayList<Room> list, Room R, int[] doors){
 		if (pos<2){
+         //System.out.println("Hello from vert! " + R.getName() + "\n");
 //n			System.out.println("board is: "+ thisTile.getBoard());
          Tile Temp= this.getBoard().getTile(pos+2);
 			for (int i: doors){
@@ -127,6 +143,7 @@ public class Tile{
 			}
 		}
 		else{
+         //System.out.println("Hello from the bottom of the board in vert " + R.getName() + "\n");
 			Tile Temp=getBoard().getTile(pos-2);
 			for (int i: doors){
 				switch(i){
@@ -154,7 +171,11 @@ public class Tile{
 
 	private void hor(ArrayList<Room> list, Room R, int[] doors){
 		Tile temp;
-		if ((pos%2)<1){
+      //System.out.println("int doors " + Arrays.toString(doors));
+      //System.out.println("POS " + pos);
+		//if ((pos%2)<1){
+      if ((pos%2)<1) {
+         //System.out.println("Hor %2???? " + R.getName() + "\n");
 			temp = getBoard().getTile(pos+1);
 			for (int i: doors){
 				switch(i){
@@ -178,6 +199,7 @@ public class Tile{
 			}
 		}
 		else{
+        // System.out.println("Hor pt 2. Anyone home????? " + R.getName() + "\n");
 			temp = getBoard().getTile(pos-1);
 			for (int j :doors){
 				switch(j){
@@ -210,8 +232,12 @@ public class Tile{
 		hor(list, R, doors);
 		Room[] newArray=new Room[list.size()];
 		list.toArray(newArray);
-		for (Room r : newArray){
-		   System.out.printf(r.getName());
+		for (int i =0; i < newArray.length; i++){
+         Room r = list.get(i);
+         if (r != null) {
+            newArray[i] = r;
+   		   //System.out.printf(r.getName());
+         }
 		}
 		return newArray;
 	}
@@ -220,19 +246,21 @@ public class Tile{
 	public void setDoors(){
 		Room[] doors;
 		Room temp;
-		System.out.println("thisTile.getDoors: " + Arrays.toString(this.outDoors));
 		for (Room R : this.outDoors){
-			if (( R != null) & !(this.Rooms.containsKey(R.getName()))){
-            System.out.println("hello");
+         // System.out.println("Outdoors in first loop: " + this.outDoors + "\n");
+			if (( R != null) && !(this.Rooms.containsKey(R))){
+          //  System.out.println("Bitches and ho's: " + R.getName() + "\n");
 				this.Rooms.put(R.getName(),R);
 			}
 		}
+      //System.out.println("Key set " + this.Rooms.keySet());
 		for (String R : this.Rooms.keySet()){
+        // System.out.println("Second for looooooooop: " + R + "\n");
 			temp = this.Rooms.get(R);
 			doors=getRooms(temp);
-			temp.setDoors(this.outDoors);
+			//temp.setDoors(this.outDoors);
+         temp.setDoors(doors);
 		}
-		return;
 	}
 
    public Room findTrailers(){

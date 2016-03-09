@@ -176,7 +176,7 @@ public class Players {
    }
    
    public boolean move(Room newRoom) {
-      if (this.room.getMoves().get(newRoom) != null) {
+      if (Arrays.asList(this.room.getDoors()).contains(newRoom)) {
          this.room = newRoom;
          return true;
       } else {

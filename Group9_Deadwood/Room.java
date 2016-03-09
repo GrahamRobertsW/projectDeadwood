@@ -20,11 +20,12 @@ public class Room{
 	private Scene Scene;
 	private String name;
 	private HashMap<String, Room> rooms;
-	private Room[] doors;
+	private Room[] doors = new Room[10];
 	private Random generator;
 	private ArrayList<Players> players;
 	private boolean complete;
 	private Board board;
+   private Tile tile;
 
 	private Scene[] Scenes;
 	Room(String N, Role[] Roles, int S){
@@ -61,18 +62,19 @@ public class Room{
 	   this.board=B;
 	}
 	public String getName(){
-		return name;
+		return this.name;
 	}
 
 	public int getShots(){
 		return this.shots;
 	}
 
-   public boolean printRoles() {
+   public void printRoles() {
    	for (Role entry : this.extraRoles.values()){
-			System.out.println(entry.getName() + " Hello");
+         if (entry != null) {
+   			System.out.println(entry.getName());
+         } 
 		}
-      return true;
    }
 
 	public int decShots(){
@@ -97,9 +99,10 @@ public class Room{
 	}
 
    public boolean printDoors() {
-      for(int i=1; i < doors.length; i++) {
-			System.out.println(i);
-         System.out.println(doors[i].getName());
+      for (int i =0; i < doors.length; i++) {
+         if (doors[i] != null) {
+            System.out.println(doors[i].getName());
+         }
       }
       return true;
    }
@@ -151,18 +154,30 @@ public class Room{
  
 
 	public void setDoors(Room[] Rs){
-		for (Room R: Rs){
-			rooms.put(R.getName(), R);
+		int i = 0;
+      for (Room R: Rs){
+         if (R != null) {
+            //System.out.println("Set Doors " + R.getName());
+            this.doors[i] = R;
+            this.rooms.put(R.getName(),R);
+            i++;
+         }
 		}
 	}
 
-	public HashMap<String, Room> getMoves(){
-		return this.rooms;
-	}
+	/*public String[] getMoves(){
+		Object[] keys = this.rooms.keySet().toArray();
+      String[] setofkeys = new String[keys.length];
+      int i=0;
+      for (Object S: keys){
+         setofkeys[i]=rooms.get(S).getName();
+      }
+      return setofkeys;
+	}*/
 
 
 	public void displayScene(){
-		System.out.printf("%s : %s.", this.Scene.getName(), this.Scene.getDesc());
+		System.out.printf("%s : %s.\n", this.Scene.getName(), this.Scene.getDesc());
 	}
 
 	public void setScene(Scene set){
@@ -202,7 +217,8 @@ public class Room{
 	*/
 
 	public Room getRoomKey(String input){
-		return rooms.get(input);
+      System.out.println("Get room key: " + this.rooms/*.get(input).getName()*/);
+		return this.rooms.get(input);
 	}
 
 }
