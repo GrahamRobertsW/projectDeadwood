@@ -109,6 +109,9 @@ public class Deadwood {
                      break;
 						case "who":
 							System.out.println(CURRENT_PLAYER.getName());
+                     System.out.println("Money: $" + CURRENT_PLAYER.getMoney());
+                     System.out.println("Credits: " + CURRENT_PLAYER.getCredits());
+                     System.out.println("Rank: " + CURRENT_PLAYER.getRank());
 							if(CURRENT_PLAYER.getRole()!=null){
 								System.out.println(CURRENT_PLAYER.getRole().getName());
 							}
@@ -197,7 +200,8 @@ public class Deadwood {
          return true;
       }
       System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
-      System.out.println("Rooms you can move to: " + CURRENT_PLAYER.getRoom().printDoors());
+      System.out.println("Rooms you can move to: "); 
+      CURRENT_PLAYER.getRoom().printDoors();
       Scanner user_input = new Scanner (System.in);
       String room_input = user_input.nextLine();      
       Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
@@ -207,7 +211,7 @@ public class Deadwood {
          System.out.println("Invalid room name.");
          return false;
       }
-      System.out.println("Room key " + room_input);
+      //System.out.println("Room key " + room_input);
 
       if (CURRENT_PLAYER.getRole() != null) {
          System.out.println("You are on a role and can't move at this time.");
@@ -228,6 +232,10 @@ public class Deadwood {
    }
    
    private void work(boolean Has_Worked) {
+      if (CURRENT_PLAYER.getRoom().getScene()==null){
+         System.out.println("This room has no work for you!");
+         return;
+      }
       if (Has_Worked == true) {
          System.out.println("Get out. While you still can...(You've already worked)");
          return;
@@ -271,6 +279,7 @@ public class Deadwood {
    
    private void upgrade() {
       boolean valid = false;
+      System.out.println("Enter how you'd like to pay for your upgrade, with money or credits. Type '$' for money and 'cr' for credits.");
       Scanner user_input = new Scanner (System.in);
       //Check if in the casting office.
 		if(CURRENT_PLAYER.getRoom().getName().equals("Casting Office")){
@@ -278,10 +287,12 @@ public class Deadwood {
 			//Check second input and upgade if eligible.
 			switch (currency_input){
 	   		case "$":
+               System.out.println("Enter the rank you'd like to upgrade to. Valid entries are a number between 2 and 6");
 			   	int dollar_input = user_input.nextInt();
 					valid = CURRENT_PLAYER.rankMoney(dollar_input);
                return;
 				case "cr":
+               System.out.println("Enter the rank you'd like to upgrade to. Valid entries are a number between 2 and 6");
 					int credit_input = user_input.nextInt();
 					valid = CURRENT_PLAYER.rankCredits(credit_input);
 					return;
