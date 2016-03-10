@@ -22,7 +22,7 @@ public class Room{
 	private HashMap<String, Room> rooms;
 	private Room[] doors = new Room[10];
 	private Random generator;
-	private ArrayList<Players> players;
+	private HashMap<String, Players> players = new HashMap<String, Players>();
 	private boolean complete;
 	private Board board;
    private Tile tile;
@@ -147,8 +147,9 @@ public class Room{
 	  for (Players P: extraPlayers){
 		  P.setMoney(P.getRole().getRank());
 	  }
-     board.success();
-     for (Players P: players){
+     //this.board.success();
+     System.out.println("Players: " + players);
+     for (Players P: this.players.values()){
         P.nullRole();
         P.nullScene();
      }
@@ -157,6 +158,14 @@ public class Room{
      }  
    }
 	}      
+   
+   public void addPlayer(Players p) {
+      players.put(p.getName(), p);
+   }
+   
+   public void removePlayer(Players p) {
+      players.remove(p.getName());
+   }
  
 
 	public void setDoors(Room[] Rs){

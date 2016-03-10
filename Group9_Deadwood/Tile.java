@@ -53,7 +53,7 @@ public class Tile{
 
 			case "MainStTile.png":
 				names = new String[] {"Main Street", "Saloon"};
-	         tempRoles = new Role[][]{{new Role("Railroad Worker", "I'm a steel-drivin' man!", 1, 0), new Role("Falls off Roof", "Aaaaiiiiigggghh!", 2, 0), new Role("woman in Black Dress", "Well, I'll be!", 2, 0), new Role("Mayor McGinty", "People of Deadwood!", 4, 0)},{new Role("Woman in Red Dress", "Come up and see me!", 2,0), new Role("Reluctant Farmer", "I ain't so sure about that!", 1, 0)}};
+	         tempRoles = new Role[][]{{new Role("Railroad Worker", "I'm a steel-drivin' man!", 1, 0), new Role("Falls off Roof", "Aaaaiiiiigggghh!", 2, 0), new Role("Woman in Black Dress", "Well, I'll be!", 2, 0), new Role("Mayor McGinty", "People of Deadwood!", 4, 0)},{new Role("Woman in Red Dress", "Come up and see me!", 2,0), new Role("Reluctant Farmer", "I ain't so sure about that!", 1, 0)}};
 	         shots = new int[] {3,2};
             pos = 1;
             this.Rooms.put("Trailers", new Room("Trailers"));

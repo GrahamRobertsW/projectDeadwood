@@ -20,6 +20,7 @@ public class Players {
       this.room = room;
       this.role = null;
 		this.scene=null;
+      this.rank = 1;
    }
    
    Players() {
@@ -30,6 +31,7 @@ public class Players {
       this.room = null;
       this.role = null;
 		this.scene=null;      
+      this.rank = 1;
    }
    
    public Players getPlayer(){
@@ -93,17 +95,27 @@ public class Players {
   }
   
   public void setRoom(Room n) {
+      if (this.room != null) {
+         this.room.removePlayer(this);
+      }   
       this.room = n;
+      this.room.addPlayer(this);
   }
   
   public Role getRole() {
       return this.role;
   }
   
-  public void setRole(Role R) {
-      this.role=R;
-		R.setPlayer(this);
-		return;
+  public boolean setRole(Role R) {
+      System.out.println("Rank: " + this.rank);
+      if (this.rank >= R.getRank()) {
+         this.role=R;
+   		R.setPlayer(this);
+         return true;
+      } else {
+         System.out.println("Role above your rank.");
+         return false;
+      }
   }
   
   public void nullRole(){
@@ -123,22 +135,29 @@ public class Players {
    if (this.role != null) {
       int budget = this.room.getBudget();
       Random dice = new Random();
-      int roll = dice.nextInt(5) + 1;
+      int roll = (dice.nextInt(5) + 1) + this.rehearsalVal;
+      System.out.println("Budget: " + budget);
+      System.out.println("You rolled a " + roll);
       if (roll >= budget) {
+         System.out.println("You successfully acted!");
          if (room.decShots() == 0) {
-            room.success();
+            System.out.println("Scene complete.");
+            this.room.success();
          }
          else if (this.role.isStarring() == 1) {
             this.credits+= 2;
+            System.out.println("You now have 2 more credits for acting in this starring role.");
          } else {
             this.credits++;
             this.money++;
+            System.out.println("For successfully acting in this extra role, you get one credit and one dollar");
          }
       } else {
          if (this.role.isStarring() == 1) {
             System.out.println("Role failed. Better luck next time");
          } else {
             this.money++;
+            System.out.println("Role failed. You get one dollar for attempting this extra role.");
          }
       } 
       return true; 

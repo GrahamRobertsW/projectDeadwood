@@ -68,7 +68,7 @@ public class Deadwood {
 		System.out.println("How many players? Between 3 and 8. ");
 		Scanner player_num = new Scanner (System.in);
 		NUMBER_OF_PLAYERS = player_num.nextInt();
-      while (NUMBER_OF_PLAYERS < 3 || NUMBER_OF_PLAYERS > 8) {
+      while (NUMBER_OF_PLAYERS < 1 || NUMBER_OF_PLAYERS > 8) {
          System.out.println("Please choose input between 3 and 8.");
          NUMBER_OF_PLAYERS = player_num.nextInt();
       }
@@ -218,6 +218,10 @@ public class Deadwood {
          System.out.println("Get out. While you still can...(You've already worked)");
          return;
       }
+      if (CURRENT_PLAYER.getRoom().getName().equals("Trailers") || CURRENT_PLAYER.getRoom().getName().equals("Casting Office")) {
+         System.out.println("No roles here. Move then try again");
+         return;
+      }
       //Check if already working on a role.
       if (CURRENT_PLAYER.getRole() != null) {
          System.out.println("You are already working a role.");
@@ -241,12 +245,14 @@ public class Deadwood {
          return;
       }
       //Set role.
-      System.out.println(CURRENT_PLAYER.getRoom().getRoles().keySet());
-      System.out.println("Role??? " + CURRENT_PLAYER.getRoom().getRoles().keySet().contains(role_input));
-		System.out.println("role_input:"+role_input);
-      CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input));
-      System.out.println("Congrats! You're an actor now! Role accepted: " + CURRENT_PLAYER.getRole().getName());
-      return;				   
+      //System.out.println(CURRENT_PLAYER.getRoom().getRoles().keySet());
+      //System.out.println("Role??? " + CURRENT_PLAYER.getRoom().getRoles().keySet().contains(role_input));
+		//System.out.println("role_input:"+role_input);
+      if (CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input))) {  
+         System.out.println("Congrats! You're an actor now! Role accepted: " + CURRENT_PLAYER.getRole().getName());
+         return;
+      } 
+      return;   
    }
    
    private void upgrade() {
@@ -280,7 +286,7 @@ public class Deadwood {
 	}
 	
 	private void setTurn(int turn){
-		CURRENT_PLAYER = TURN_ORDER[turn];
+		CURRENT_PLAYER = TURN_ORDER[turn%(TURN_ORDER.length)];
 	}
 	
 	public Players getTurn(){
