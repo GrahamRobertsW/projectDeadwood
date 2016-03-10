@@ -72,11 +72,11 @@ public class Room{
    public void printRoles() {
    	for (Role entry : this.extraRoles.values()){
          if (entry != null) {
-   			System.out.println(entry.getName());
+   			System.out.println(entry.getName()+ ": " + entry.getRank());
          } 
 		}
 		for (Role sceneR:this.Scene.getRoles().values()){
-			System.out.println(sceneR.getName());
+			System.out.println(sceneR.getName()+ ": "+sceneR.getRank());
 		}
    }
 
@@ -138,6 +138,9 @@ public class Room{
         for (int i=0; i<5; i++){
            scenePlayers.get(i%scenePlayers.size()).setMoney(randomized[i]);
         }
+		  for (Players P : scenePlayers){
+			  P.reset();
+		  }
      }
 	  ArrayList<Players> extraPlayers = new ArrayList<Players>();
 	  for (String key : extraRoles.keySet()){
@@ -146,6 +149,7 @@ public class Room{
 			  extraPlayers.add(role.getPlayer());
 	  for (Players P: extraPlayers){
 		  P.setMoney(P.getRole().getRank());
+		  P.reset();
 	  }
      //this.board.success();
      System.out.println("Players: " + players);

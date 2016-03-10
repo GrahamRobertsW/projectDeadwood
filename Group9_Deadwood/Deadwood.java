@@ -108,11 +108,23 @@ public class Deadwood {
 							upgrade();
                      break;
 						case "who":
-							System.out.println(CURRENT_PLAYER.getName() + " " + CURRENT_PLAYER.getRole().getName());
+							System.out.println(CURRENT_PLAYER.getName());
+							if(CURRENT_PLAYER.getRole()!=null){
+								System.out.println(CURRENT_PLAYER.getRole().getName());
+							}
+							else{
+								System.out.println("Ya don't have a role ya lazy bum");
+							}
 							break;
 							
 						case "where":
-							System.out.println(CURRENT_PLAYER.getRoom().getName() + " " + CURRENT_PLAYER.getRoom().getScene().getName());
+							System.out.println(CURRENT_PLAYER.getRoom().getName());
+							if(CURRENT_PLAYER.getRoom().getScene()!=null){
+								System.out.println(CURRENT_PLAYER.getRoom().getScene().getName());
+							}
+							else{
+								System.out.println("This Room doesn't have a Scene");
+							}
 							break;
 							
 						case "rehearse":
@@ -136,9 +148,6 @@ public class Deadwood {
 								break;
 							} else {
 								//Check if scene completed.
-								if(CURRENT_PLAYER.getRoom().checkSuccess() == true){
-									SCENE_COUNT++;
-								}
 								Has_Worked = true;
 								break;
 							}
@@ -161,7 +170,10 @@ public class Deadwood {
 		//Start end game process.
 		endGame();	
 	}
-	
+   public void countScene(){
+		SCENE_COUNT++;
+	}
+
 	private void endGame(){
 		HashMap<Players, Integer> score = new HashMap<Players, Integer>();
 		for(int i = 0; i < NUMBER_OF_PLAYERS; i++){
@@ -207,8 +219,10 @@ public class Deadwood {
          return false;
       }
 		if(CURRENT_PLAYER.getRoom().getScene()==null&&!CURRENT_PLAYER.getRoom().isComplete()){
-			CURRENT_PLAYER.getRoom().setScene(this.SCENES[SCENE_COUNT]);
-			this.SCENE_COUNT++;
+			if(!(CURRENT_PLAYER.getRoom().getName().equals("Trailers")||CURRENT_PLAYER.getRoom().getName().equals("Casting Office"))){
+				CURRENT_PLAYER.getRoom().setScene(this.SCENES[SCENE_COUNT]);
+			   this.SCENE_COUNT++;
+			}
 		}
       return true;
    }
@@ -259,7 +273,7 @@ public class Deadwood {
       boolean valid = false;
       Scanner user_input = new Scanner (System.in);
       //Check if in the casting office.
-		if(CURRENT_PLAYER.getRoom().equals("Casting Office")){
+		if(CURRENT_PLAYER.getRoom().getName().equals("Casting Office")){
 			String currency_input = user_input.next();
 			//Check second input and upgade if eligible.
 			switch (currency_input){

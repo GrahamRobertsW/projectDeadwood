@@ -88,6 +88,7 @@ public class Players {
   
   public void reset() {
       this.rehearsalVal = 0;
+		this.role=null;
   }
   
   public Room getRoom() {
@@ -192,7 +193,7 @@ public class Players {
      } else {
          System.out.println("Not enough credits to rank up! Choose another rank, come back later, or try using money.");
          return false;
-     }
+    }
    }
    
    public boolean move(Room newRoom) {
