@@ -63,7 +63,7 @@ public class Tile{
 
 			case "TrainTile.png":
             names=new String[]{"Train Station","General Store", "Jail"};
-	         tempRoles=new Role[][]{{new Role("Crusty Prospector", "Aww, peaches!", 1,0), new Role("Dragged by Train", "Omgeezers", 1, 0), new Role("Preacher with Ba", "The Lord will provide", 2, 0), new Role("Cyrus the Gunfighter", "Git to fightin' or git away!", 4,0)},{new Role("Man in Overalls", "Look like a storm's comin' in.", 1, 0), new Role("Mister Keach", "Howdy, stranger.", 3, 0)}, {new Role("Prisoner in Cell", "Zzzzzzz... Whiskey", 2, 0), new Role("Feller in Irons", "Ah kilt the wrong man!", 3, 0)}};
+	         tempRoles=new Role[][]{{new Role("Crusty Prospector", "Aww, peaches!", 1,0), new Role("Dragged by Train", "Omgeezers", 1, 0), new Role("Preacher with Bag", "The Lord will provide", 2, 0), new Role("Cyrus the Gunfighter", "Git to fightin' or git away!", 4,0)},{new Role("Man in Overalls", "Look like a storm's comin' in.", 1, 0), new Role("Mister Keach", "Howdy, stranger.", 3, 0)}, {new Role("Prisoner in Cell", "Zzzzzzz... Whiskey", 2, 0), new Role("Feller in Irons", "Ah kilt the wrong man!", 3, 0)}};
 	         shots=new int[]{3,2,1};
             pos = 0;
 				populateRooms(shots,names,tempRoles,this.Rooms);
@@ -76,7 +76,6 @@ public class Tile{
 		for (int i=0; i<names.length; i++){
 			Room temp=new Room(names[i], tempRoles[i], shots[i]);
 			hashbrowns.put(names[i],temp);
-         System.out.println("populateRooms " + names[i]);
 	   }
 	}
 	private int[] iDoors(Room R){
