@@ -5,12 +5,17 @@ import javax.swing.*;
 import java.awt.event.*;
 public class SwingPlayer extends JPanel implements MouseListener, MouseMotionListener{
    private boolean curo;
-      SwingPlayer(String filename){
+	private JLabel label;
+	private JFrame master;
+      SwingPlayer(String filename, JFrame M){
+		this.master=M;
       this.setSize(40,40);
-      JLabel label=new JLabel();
+      this.label=new JLabel();
       ImageIcon img = new ImageIcon(filename);
       label.setIcon(img);
       this.add(label);
+		this.setVisible(true);
+		label.setVisible(true);
    }  
 
       public void mouseEntered(MouseEvent e){
@@ -23,12 +28,17 @@ public class SwingPlayer extends JPanel implements MouseListener, MouseMotionLis
 
       public void mouseDragged(MouseEvent e){
          if (this.curo==true){
-            this.setLocation(e.getX(), e.getY());
+            this.label.setLocation(e.getX(), e.getY());
+				this.master.pack();
          }
       }
-
+      public JLabel getLabel(){
+			return this.label;
+		}
       public void mouseMoved(MouseEvent e){}
-      public void mouseClicked(MouseEvent e){}
+      public void mouseClicked(MouseEvent e){
+		   this.label.setLocation(30,30);
+		}
       public void mouseReleased(MouseEvent e){}
       public void mousePressed(MouseEvent e){}
 }
