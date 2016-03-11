@@ -41,7 +41,7 @@ public class Deadwood {
 	}
 	
 	private void createTurnOrder(int ordernum){
-		TURN_ORDER[ordernum] = new Players(0, 1, 0, 0, PLAYER_NAMES[ordernum]);
+		TURN_ORDER[ordernum] = new Players(0, 4, 0, 0, PLAYER_NAMES[ordernum]);
       //int i = (int)(Math.random() * NUMBER_OF_PLAYERS);
 		/*if(TURN_ORDER[ordernum] == null){
  	               TURN_ORDER[ordernum] = new Players();
@@ -86,7 +86,7 @@ public class Deadwood {
 		//Begin the game
 		setTurn(0);
 		while(CURRENT_DAY < 3){
-			while(SCENE_COUNT < 9) {
+			while(SCENE_COUNT < 2) {
 				
 				boolean New_Turn = false;
 				boolean Has_Moved = false;
@@ -157,7 +157,7 @@ public class Deadwood {
 							
 						case "end":
 							int n=findIndexPlayer(TURN_ORDER, CURRENT_PLAYER);
-                     n++;
+                    					 n++;
 							setTurn(n);
 							New_Turn = true;
 							break;
@@ -168,7 +168,16 @@ public class Deadwood {
 					}
 				}
 			}
+			//System.out.println("New Day " + CURRENT_DAY++);
+			for(int i = 0; i < 4; i++){
+			 	Tile t = board.getTile(i);
+				for(Room r : t.getRoomyRooms()){
+					r.reset();
+				}		
+			}
+			SCENE_COUNT = 0;
 			CURRENT_DAY++;
+			System.out.println("New Day " + CURRENT_DAY);
 		}
 		//Start end game process.
 		endGame();	
@@ -199,6 +208,10 @@ public class Deadwood {
          System.out.println("You have already moved this turn.");
          return true;
       }
+      if (!(CURRENT_PLAYER.getRoom().getName().equals("Trailers") || CURRENT_PLAYER.getRoom().getName().equals("Casting Office") && (CURRENT_PLAYER.getRole() != null))) {
+		CURRENT_PLAYER.getScene().removePlayer(CURRENT_PLAYER);
+		System.out.println("Player reomved from last scene");
+	}
       System.out.println("Current room: " + CURRENT_PLAYER.getRoom().getName());
       System.out.println("Rooms you can move to: "); 
       CURRENT_PLAYER.getRoom().printDoors();
@@ -207,7 +220,7 @@ public class Deadwood {
       Room RoomInput = CURRENT_PLAYER.getRoom().getRoomKey(room_input);
 
       //Check for valid entry.
-      if(room_input == null){
+      if(RoomInput == null){
          System.out.println("Invalid room name.");
          return false;
       }
@@ -270,8 +283,14 @@ public class Deadwood {
       //System.out.println(CURRENT_PLAYER.getRoom().getRoles().keySet());
       //System.out.println("Role??? " + CURRENT_PLAYER.getRoom().getRoles().keySet().contains(role_input));
 		//System.out.println("role_input:"+role_input);
-      if (CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input))) {  
-         System.out.println("Congrats! You're an actor now! Role accepted: " + CURRENT_PLAYER.getRole().getName());
+      if (CURRENT_PLAYER.setRole(CURRENT_PLAYER.getRoom().getRoles().get(role_input))) {
+		CURRENT_PLAYER.setScene(CURRENT_PLAYER.getRoom().getScene());  
+	    if (CURRENT_PLAYER.getRoom().getRoles().get(role_input).isStarring() == 1) {
+		System.out.println("Player scene " + CURRENT_PLAYER.getScene());
+		CURRENT_PLAYER.getScene().addPlayer(CURRENT_PLAYER);
+		System.out.println("Starring Role. " + CURRENT_PLAYER.getScene().getPlayers());
+	}
+	System.out.println("Congrats! You're an actor now! Role accepted: " + CURRENT_PLAYER.getRole().getName());
          return;
       } 
       return;   

@@ -59,6 +59,11 @@ public class Scene{
 	public void addPlayer(Players player){		
 		players.add(player);
 	}
+
+	public void removePlayer(Players player) {
+		players.remove(player);
+		players.trimToSize();
+	}
 	public ArrayList<Players> getPlayers(){
 		return this.players;
 	}
@@ -70,7 +75,7 @@ public class Scene{
 	public void used(boolean value){
 		this.use = value;
 	}
-	
+/*	
 	public boolean getSuccess(){
 		return this.success;
 	}
@@ -78,7 +83,7 @@ public class Scene{
 	public void setSuccess(boolean val){
 		this.success = val;
 	}
-
+*/
 	public String getName(){
 		return this.name;
 	}

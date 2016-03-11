@@ -72,11 +72,11 @@ public class Room{
    public void printRoles() {
       for (Role entry : this.extraRoles.values()){
          if (entry != null) {
-            System.out.println(entry.getName()+ ": " + entry.getRank());
+            System.out.print(entry.getName()+ ": " + entry.getRank()+ " Extra Role \n");
          } 
       }
       for (Role sceneR:this.Scene.getRoles().values()){
-         System.out.println(sceneR.getName()+ ": "+sceneR.getRank());
+         System.out.println(sceneR.getName()+ ": "+sceneR.getRank() + " Starring Role");
       }
    }
 
@@ -90,6 +90,7 @@ public class Room{
    }
    public int reset(){
       this.shots=this.maxShots;
+	this.complete = false;
       return this.shots;
    }
 
@@ -115,7 +116,7 @@ public class Room{
    
    public void roleSort(ArrayList<Players> Ps){
       Players temp;
-      for (int i=Ps.size(); i>1; i--){
+      for (int i=Ps.size(); i>2; i--){
          int j=i;
          while (Ps.get(i).getRank() > Ps.get(i-1).getRank()){
             temp=Ps.get(i-1);
@@ -127,8 +128,11 @@ public class Room{
    }
 
    public void success(){
+	System.out.println("~~~~~~~~~~Scene.getPlayers(): " + this.Scene.getPlayers() + " ~~~~~~~~~~~");
       ArrayList<Players> scenePlayers = this.Scene.getPlayers();
-      if (scenePlayers.size()>0){
+	/* Handles payout if there are more than 0 starring players on a scene.*/
+      if (scenePlayers.size() > 1){
+		System.out.println("~~~~~~~~~~~~~~~Starring Player success?~~~~~~~~~~~~~~~~");
          int[] randomized = new int[5];
          for (int i=0; i<5; i++){
             randomized[i]=generator.nextInt(5)+1;
@@ -136,12 +140,14 @@ public class Room{
          Arrays.sort(randomized);
          roleSort(scenePlayers);
          for (int i=0; i<5; i++){
-            scenePlayers.get(i%scenePlayers.size()).setMoney(randomized[i]);
+           	System.out.println("~~~~~~~~~~~~~~`Starring payout? " + randomized[i] + "~~~~~~~~");
+		 scenePlayers.get(i%scenePlayers.size()).setMoney(randomized[i]);
          }
          for (Players P : scenePlayers){
             P.reset();
          }
       }
+	/* Handles payout for extra roles. */
       ArrayList<Players> extraPlayers = new ArrayList<Players>();
       for (String key : extraRoles.keySet()){
          Role role = extraRoles.get(key);
@@ -151,16 +157,19 @@ public class Room{
                P.setMoney(P.getRole().getRank());
                P.reset();
             }
+          }	
+	}
          //this.board.success();
             System.out.println("Players: " + players);
-            for (Players P: this.players.values()){
-               P.nullRole();
-               P.nullScene();
+	/* Resets the scene, role, and rehearsal values for the players on the role. */
+	 for (Players P: this.players.values()){
+               P.reset();
             }
+
             this.Scene=null;
             this.complete=true;
-         }  
-      }
+           
+      
    }      
    
    public void addPlayer(Players p) {
@@ -220,11 +229,11 @@ public class Room{
    public Scene getScene(){
       return this.Scene;
    }
-
+/*
    public boolean checkSuccess(){
       return this.Scene.getSuccess();
    }
-	
+*/	
 	/*public Room getRoomKey(String input){
 		for(String key : rooms.keySet()){
 			if(rooms.get(key).equals(input)){

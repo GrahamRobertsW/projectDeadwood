@@ -284,6 +284,16 @@ public class Tile{
    public Room getRoom(int i){
 		return this.outDoors[i];
 	}
+
+   public Room[] getRoomyRooms(){
+	Room[] returnRooms = new Room[3];
+	int i = 0; 
+	for(String R: Rooms.keySet()){
+		returnRooms[i] = this.Rooms.get(R);
+		i++;
+	}
+	return returnRooms;
+   }
 }
    //Tile(int position, HashMap<String,  R){
    //	this.poition=pos;
