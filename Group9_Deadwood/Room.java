@@ -1,5 +1,9 @@
+/* Room keeps track of a lot of things. It tracks the extra roles from the tile it's on and the starring roles from the scene that it has.
+ * It tracks the rooms that you can move to when you're in it, and it handles completed scenes.That includes payout for players, and 
+ * resetting things.
+ */
+
 package Group9_Deadwood;
-//import Group9_Deadwood.Role;
 import java.util.*;
 import java.util.Arrays;
 public class Room{
@@ -40,12 +44,10 @@ public class Room{
       this.complete=false;
       this.extraRoles = new HashMap<String, Role>();
       for (Role R : Roles){
-      //			System.out.printf("%s\n", R.getName());
          extraRoles.put(R.getName(),R);
       }
       this.rooms=new HashMap<String, Room>();
       this.generator = new Random();
-   	//this.board=B;
    }
    
    Room(String N){
@@ -95,7 +97,11 @@ public class Room{
    }
 
    public int getBudget(){
-      return this.Scene.getBudget();
+	if (this.Scene != null) { 
+      		return this.Scene.getBudget();
+   	} else {
+		return 0;
+	}
    }
    public String getRoomName(){
       return this.name;
@@ -128,11 +134,9 @@ public class Room{
    }
 
    public void success(){
-	System.out.println("~~~~~~~~~~Scene.getPlayers(): " + this.Scene.getPlayers() + " ~~~~~~~~~~~");
       ArrayList<Players> scenePlayers = this.Scene.getPlayers();
 	/* Handles payout if there are more than 0 starring players on a scene.*/
-      if (scenePlayers.size() > 1){
-		System.out.println("~~~~~~~~~~~~~~~Starring Player success?~~~~~~~~~~~~~~~~");
+      if (!scenePlayers.isEmpty()){
          int[] randomized = new int[5];
          for (int i=0; i<5; i++){
             randomized[i]=generator.nextInt(5)+1;
@@ -140,11 +144,13 @@ public class Room{
          Arrays.sort(randomized);
          roleSort(scenePlayers);
          for (int i=0; i<5; i++){
-           	System.out.println("~~~~~~~~~~~~~~`Starring payout? " + randomized[i] + "~~~~~~~~");
 		 scenePlayers.get(i%scenePlayers.size()).setMoney(randomized[i]);
          }
-         for (Players P : scenePlayers){
-            P.reset();
+	 int i=0;
+         while (!scenePlayers.isEmpty()){
+		Players clear = scenePlayers.get(i);
+		clear.getScene().removePlayer(clear);
+		clear.reset();
          }
       }
 	/* Handles payout for extra roles. */
@@ -159,8 +165,6 @@ public class Room{
             }
           }	
 	}
-         //this.board.success();
-            System.out.println("Players: " + players);
 	/* Resets the scene, role, and rehearsal values for the players on the role. */
 	 for (Players P: this.players.values()){
                P.reset();
@@ -185,7 +189,6 @@ public class Room{
       int i = 0;
       for (Room R: Rs){
          if (R != null) {
-            //System.out.println("Set Doors " + R.getName());
             this.doors[i] = R;
             this.rooms.put(R.getName(),R);
             i++;
@@ -193,15 +196,6 @@ public class Room{
       }
    }
 
-	/*public String[] getMoves(){
-		Object[] keys = this.rooms.keySet().toArray();
-      String[] setofkeys = new String[keys.length];
-      int i=0;
-      for (Object S: keys){
-         setofkeys[i]=rooms.get(S).getName();
-      }
-      return setofkeys;
-	}*/
 
 
    public void displayScene(){
@@ -229,23 +223,8 @@ public class Room{
    public Scene getScene(){
       return this.Scene;
    }
-/*
-   public boolean checkSuccess(){
-      return this.Scene.getSuccess();
-   }
-*/	
-	/*public Room getRoomKey(String input){
-		for(String key : rooms.keySet()){
-			if(rooms.get(key).equals(input)){
-				return rooms.get(key);
-			}
-		}
-		return null;
-	}	
-	*/
 
    public Room getRoomKey(String input){
-      //System.out.println("Get room key: " + this.rooms/*.get(input).getName()*/);
       return this.rooms.get(input);
    }
 

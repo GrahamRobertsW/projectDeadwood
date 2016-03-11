@@ -1,3 +1,9 @@
+/* Board sets the tiles and puts them in the correct places.
+ * See Tile for explanation on how they are placed. Our tiles
+ * are put in the same order every time.
+ */
+
+
 package Group9_Deadwood;
 import java.util.*;
 public class Board{
@@ -20,17 +26,13 @@ public class Board{
 	}
    public void initializeBoard(){
 	   for (String i: keys){
-//	   	System.out.printf("setting Doors for %s\n", i);
 			tiles.get(i).setBoard(this);
-         //System.out.println("setting doors");
       }
 	}
 
    public void initializeTiles(){
 	   for (String i: keys){
-//t	   	System.out.printf("setting Doors for %s\n", i);
 	   	tiles.get(i).setDoors();
-         //System.out.println("Get Doors: " + tiles.get(i).getDoors());
       }
 	}
 

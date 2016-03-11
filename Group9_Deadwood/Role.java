@@ -1,3 +1,9 @@
+/* Role is simple and requires minimal explanation. 
+ *	
+ */
+
+
+
 package Group9_Deadwood;
 import java.util.Random.*;
 
@@ -32,6 +38,10 @@ public class Role{
 
 	public boolean isTaken(){
 		return this.taken;
+	}
+
+	public void setTaken(Boolean b) {
+		this.taken = b;
 	}
 
 	public void setPlayer(Players P){

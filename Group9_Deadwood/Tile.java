@@ -1,3 +1,9 @@
+/* Tiles constructs each of the four tiles, hard coded with room names, extra roles, and shot counters. 
+ * They are placed by Board. Tiles works with Room via Doors to track which room are next to eachother.
+ * Vert and Hor are functions that find adjoning rooms.
+ */
+
+
 package Group9_Deadwood;
 import java.util.*;
 
@@ -22,9 +28,6 @@ public class Tile{
 	private Board board;
 	private HashMap<String, Room> Rooms;
 	private String FN;
-//ublic Room getRoom(int i){
-//		return outDoors[i];
-//	}
    Tile(String filename){
 		this.Rooms=new HashMap<String, Room>();
 		this.FN=filename;
@@ -108,7 +111,6 @@ public class Tile{
          return false;
       }
 	}
-   //Is this an and??? or is it an or????? Find out the hard way
 	private void insertIntoDoors(Room newRoom, ArrayList<Room> list, Room me){
 		if (!(RoomCMP(newRoom, me))&& !(list.contains(newRoom))){
 			list.add(newRoom);
@@ -117,8 +119,6 @@ public class Tile{
 	}
 	private void vert(ArrayList<Room> list, Room R, int[] doors){
 		if (pos<2){
-         //System.out.println("Hello from vert! " + R.getName() + "\n");
-//n			System.out.println("board is: "+ thisTile.getBoard());
          Tile Temp= this.getBoard().getTile(pos+2);
 			for (int i: doors){
 				switch(i){
@@ -142,7 +142,6 @@ public class Tile{
 			}
 		}
 		else{
-         //System.out.println("Hello from the bottom of the board in vert " + R.getName() + "\n");
 			Tile Temp=getBoard().getTile(pos-2);
 			for (int i: doors){
 				switch(i){
@@ -170,11 +169,7 @@ public class Tile{
 
 	private void hor(ArrayList<Room> list, Room R, int[] doors){
 		Tile temp;
-      //System.out.println("int doors " + Arrays.toString(doors));
-      //System.out.println("POS " + pos);
-		//if ((pos%2)<1){
       if ((pos%2)<1) {
-         //System.out.println("Hor %2???? " + R.getName() + "\n");
 			temp = getBoard().getTile(pos+1);
 			for (int i: doors){
 				switch(i){
@@ -198,7 +193,6 @@ public class Tile{
 			}
 		}
 		else{
-        // System.out.println("Hor pt 2. Anyone home????? " + R.getName() + "\n");
 			temp = getBoard().getTile(pos-1);
 			for (int j :doors){
 				switch(j){
@@ -223,7 +217,7 @@ public class Tile{
 			return;
 		}
 	}
-
+	//Returns an array of rooms that are connected to the tile. Called by setDoors
 	public Room[] getRooms(Room R){
 		ArrayList<Room> list = new ArrayList<Room>();
 		int[] doors = iDoors(R);
@@ -235,7 +229,6 @@ public class Tile{
          Room r = list.get(i);
          if (r != null) {
             newArray[i] = r;
-   		   //System.out.printf(r.getName());
          }
 		}
 		return newArray;
@@ -246,18 +239,13 @@ public class Tile{
 		Room[] doors;
 		Room temp;
 		for (Room R : this.outDoors){
-         // System.out.println("Outdoors in first loop: " + this.outDoors + "\n");
 			if (( R != null) && !(this.Rooms.containsKey(R))){
-          //  System.out.println("Bitches and ho's: " + R.getName() + "\n");
 				this.Rooms.put(R.getName(),R);
 			}
 		}
-      //System.out.println("Key set " + this.Rooms.keySet());
 		for (String R : this.Rooms.keySet()){
-        // System.out.println("Second for looooooooop: " + R + "\n");
 			temp = this.Rooms.get(R);
 			doors=getRooms(temp);
-			//temp.setDoors(this.outDoors);
          temp.setDoors(doors);
 		}
 	}
@@ -285,6 +273,7 @@ public class Tile{
 		return this.outDoors[i];
 	}
 
+   // Returns an array of rooms in the tile	
    public Room[] getRoomyRooms(){
 	Room[] returnRooms = new Room[3];
 	int i = 0; 
@@ -295,11 +284,5 @@ public class Tile{
 	return returnRooms;
    }
 }
-   //Tile(int position, HashMap<String,  R){
-   //	this.poition=pos;
-   //	this.rooms = new HashMap<String, Room>
-   //	for each Room in R{
-   //		temp = new Room(
-   //		insert into rooms
    
                      

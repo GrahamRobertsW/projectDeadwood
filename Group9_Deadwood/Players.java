@@ -7,7 +7,7 @@ public class Players {
    private int credits;
    private int rank;
    private int money;
-   private int rehearsalVal = 6;
+   private int rehearsalVal;
    private String name;
    private Room room;
    private Role role;
@@ -15,11 +15,11 @@ public class Players {
    Players(int credits, int rank, int money, int rehearsalVal, String name) {
       this.credits = credits;
       this.money = money;
-      this.rehearsalVal = 6;
+      this.rehearsalVal = rehearsalVal;
       this.name = name;
       this.room = room;
       this.role = null;
-		this.scene=null;
+      this.scene=null;
       this.rank = rank;
    }
    
@@ -87,7 +87,7 @@ public class Players {
   }
   
   public void reset() {
-	this.rehearsalVal = 6;
+	this.rehearsalVal = 0;
 	this.role=null;
 	this.scene=null;
   }
@@ -97,11 +97,7 @@ public class Players {
   }
   
   public void setRoom(Room n) {
-      if (this.room != null) {
-         this.room.removePlayer(this);
-      }   
       this.room = n;
-      this.room.addPlayer(this);
   }
   
   public Role getRole() {
@@ -113,7 +109,6 @@ public class Players {
       if (this.rank >= R.getRank()) {
          this.role=R;
        	R.setPlayer(this);
-	//this.scene.addPlayer(this);
          return true;
       } else {
          System.out.println("Role above your rank.");
@@ -122,9 +117,10 @@ public class Players {
   }
   
   public void nullRole(){
-	//this.scene.
-	  this.role=null;
-	  return;
+	boolean taken = false;
+	this.role.setTaken(taken);  
+	this.role=null;
+	return;
   }
 
  public Scene getScene() {
@@ -133,7 +129,6 @@ public class Players {
 
   public void setScene(Scene S){
 	  this.scene=S;
-	this.scene.addPlayer(this);
 	  return;
   }
 
@@ -147,15 +142,12 @@ public class Players {
       Random dice = new Random();
       int roll = (dice.nextInt(5) + 1) + this.rehearsalVal;
       System.out.println("Budget: " + budget);
+      int shots = this.room.getShots();
       System.out.println("You rolled a " + roll);
-	System.out.println("Shots: " + this.room.getShots());
+	System.out.println("Shots: " + shots);
       if (roll >= budget) {
          System.out.println("You successfully acted!");
-         if (this.room.decShots() <= 0) {
-            System.out.println("Scene complete.");
-            this.room.success();
-         }
-         else if (this.role.isStarring() == 1) {
+	if (this.role.isStarring() == 1) {
             this.credits+= 2;
             System.out.println("You now have 2 more credits for acting in this starring role.");
          } else {
@@ -163,6 +155,10 @@ public class Players {
             this.money++;
             System.out.println("For successfully acting in this extra role, you get one credit and one dollar");
          }
+        if (this.room.decShots() == 0) {
+           System.out.println("Scene complete.");
+           this.room.success();
+        }  
       } else {
          if (this.role.isStarring() == 1) {
             System.out.println("Role failed. Better luck next time");
@@ -170,7 +166,9 @@ public class Players {
             this.money++;
             System.out.println("Role failed. You get one dollar for attempting this extra role.");
          }
-      } 
+      }
+
+ 
       return true; 
    } else {
       System.out.println("Please take a role before acting");
